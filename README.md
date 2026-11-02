@@ -1,32 +1,54 @@
 # Ioleia website — founder review preview
 
-A buildless, local-only website preview. **Signups are not live. Do not merge or deploy this branch.**
+A buildless, one-page founder-review preview. **Signups are not live. Do not merge or deploy this branch yet.**
 
-## Review
+## Current direction
 
-- [Desktop](docs/review/desktop.jpg), [tablet](docs/review/tablet.jpg), [phone](docs/review/phone.jpg)
-- [Validation record](docs/review/VALIDATION-2026-11-02.md)
-- [Brand provenance and limits](docs/brand/PROVENANCE-2026-11-02.md)
-- [Future consent contract](docs/signup-consent-contract.json)
+The page is intentionally minimal:
 
-Run `python3 -m http.server 8765 --bind 127.0.0.1` from this directory and open `http://127.0.0.1:8765`. No installation, build, third-party font, API key, or backend is needed. `index.html` also works directly from disk.
+1. Meet Ioleia and understand the core promise.
+2. See the honesty/difference statement.
+3. Join the early-access list.
 
-## Scope and continuity
+There are no section tabs, feature grids, Light Field explanations, product jargon, or competing marketing calls to action.
 
-The branch descends from `website/full-site-2026-11-02` at `e1a3245f3136fda6571ebe0d6e0c51c4106991ab`. That branch and its earlier commits are preserved. The buildless HTML/CSS structure, shell layout, anchor navigation, headline, company facts, contact links, and development-stage framing were retained or adapted. The generic orb/rings and unapproved marks were removed from this branch; their history remains available.
+The only marketing action is **Join early access**, with the email field available in the hero and repeated at the bottom for visitors who decide after scrolling.
 
-The public rollback is GitHub Pages on `main` at `363f79ea5e8c0cf2687879963fe33e7bf1fdd5db`. Pages settings were inspected read-only and showed `main` / root as the publishing source. `CNAME` remains byte-identical. This branch adds no deployment workflow, hosting configuration, or production integration.
+Public copy is first-person Ioleia voice, short and plain-language. It does not use “Alpha” or “AI companion” as marketing positioning.
 
-## Preview behavior
+## Signup boundary
 
-The page contains the hero, continuity/truthfulness/agency/privacy principles, a Light Field study, Ioleia Inc. company information, and the prelaunch form. Product language describes intentions and work in development; it does not assert that production privacy or Alpha admission gates have passed.
+Both email forms are **preview-only**.
 
-The Light Field uses CSS windows onto the untouched approved reference image, with static atmospheric overlays and slow transform/opacity animation (23–43 seconds). The orb is not animated. No WebGL, canvas render loop, hue cycling, or animated blur is used. Motion pauses outside the viewport and in hidden tabs. A visible pause control is supplied; reduced-motion preferences remove all animations and transitions. The study's response button shows one small, locally brightened area. It is labeled as a visual study, not an AI interaction or product screenshot.
+- email only;
+- no first-name field;
+- no consent checkbox in the founder-approved UX direction;
+- no network request;
+- no storage;
+- no cookies;
+- no analytics;
+- no endpoint;
+- CSP blocks connections and form submission;
+- JavaScript-disabled state leaves submit controls disabled.
 
-The form requires email and an unchecked consent checkbox; first name is optional. It only validates locally, clears the fields, and announces that nothing was sent or saved. There are no network calls, storage writes, cookies, analytics, or signup endpoint. CSP disallows connections and form submission, and the button is disabled when JavaScript is unavailable. The consent version is attached to the form; the proposed future record is documentation only.
+The production signup flow still requires the separately approved backend, unsubscribe handling, final disclosure text, and legal/CASL review. This preview does not claim legal sufficiency.
 
-## Before any live deployment
+## Brand and motion
 
-Founder visual review is required. The remaining identity decision is approval/licensing of the permanent wordmark typography; the current Georgia/system-serif treatment is provisional. The A2.1 geometry decision is closed.
+The page continues to use the approved luminous orb and wispy Light Field reference. A2.1 remains the canonical geometry authority. Rejected `colour-v1` assets are not used.
 
-Technical launch work remains separate: faithful production artwork export/geometry qualification, an approved subscription backend with consent and unsubscribe handling, final privacy/contact disclosures, removal of preview-only/noindex behavior only when appropriate, and a separately authorized hosting cutover. Do not infer permission to perform those steps from this preview. Alpha privacy/authentication/inference gates are unchanged.
+The Light Field is visual only; the page does not explain it. Motion is slow and decorative, pauses when hidden/offscreen, includes a pause control, and respects reduced-motion preferences.
+
+The permanent wordmark typeface remains unapproved. The current Georgia/system-serif treatment is provisional.
+
+## Review and validation
+
+See `docs/review/VALIDATION-2026-11-02.md`.
+
+The older screenshot files under `docs/review/` are retained as historical evidence from the earlier, more complex layout. They do **not** represent this final simplified copy/layout and must not be used as founder visual approval.
+
+## Live boundary
+
+The public rollback remains GitHub Pages on `main` at the existing live site. This draft branch contains no deployment workflow or production integration.
+
+Do not merge, deploy, switch hosting, or change DNS/email records until founder visual approval and the separately authorized hosting/signup work are complete.
