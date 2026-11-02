@@ -15,15 +15,21 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="light-field" aria-hidden="true"><div class="field-haze"></div><div class="field-flow"></div><div class="field-glimmer"></div></div>
+
   <header class="site-header shell">
-    <span class="wordmark" aria-label="Ioleia">ioleia</span>
-    <span class="preview-notice">Design preview · Signups are not live</span>
+    <span class="brand-lockup" aria-label="Ioleia">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <span class="wordmark">ioleia</span>
+    </span>
+    <span class="preview-notice preview-only">Design preview · Signups are not live</span>
     <button class="motion-control" id="motion-control" type="button" aria-pressed="false" hidden>Pause motion</button>
   </header>
+
   <main id="main" tabindex="-1">
     <div class="scene">
-      <img class="orb-art" src="./assets/ioleia-a2-1-luminous.svg" width="350" height="350" alt="Ioleia luminous orb — two flowing presences">
+      <div class="orb-art" role="img" aria-label="Ioleia luminous orb — two flowing presences"></div>
       <h1 class="sr-only">Meet Ioleia</h1>
+
       <div class="messages" id="messages" aria-live="off">
         <section class="moment" aria-labelledby="moment-one" data-dwell="16000">
           <h2 id="moment-one">Hi. I’m Ioleia.</h2>
@@ -34,6 +40,7 @@
             <p class="emphasis">When you come back, you won’t have to explain it all again.</p>
           </div>
         </section>
+
         <section class="moment" aria-labelledby="moment-two" data-dwell="20000">
           <h2 id="moment-two">I won’t just agree with you.</h2>
           <p class="subhead">I’ll help you think things through.</p>
@@ -43,6 +50,7 @@
             <p>I’m AI, not a person. I’ll be honest about that.</p>
           </div>
         </section>
+
         <section class="moment" aria-labelledby="moment-three" data-dwell="14000">
           <h2 id="moment-three">We haven’t met yet.</h2>
           <p class="subhead">I’m still being built.</p>
@@ -52,11 +60,13 @@
           </div>
         </section>
       </div>
+
       <div class="message-controls" role="group" aria-label="Read at your own pace" hidden>
         <button type="button" aria-label="Read message 1: Hi. I’m Ioleia." aria-controls="messages" aria-pressed="true"><span></span></button>
         <button type="button" aria-label="Read message 2: I won’t just agree with you." aria-controls="messages" aria-pressed="false"><span></span></button>
         <button type="button" aria-label="Read message 3: We haven’t met yet." aria-controls="messages" aria-pressed="false"><span></span></button>
       </div>
+
       <form class="signup-form" id="signup-form" aria-describedby="signup-copy preview-copy" autocomplete="off">
         <div class="signup-row">
           <label class="sr-only" for="email">Email</label>
@@ -67,12 +77,13 @@
           <span>Coming first to iPhone.</span>
           <span>I’ll email you when Ioleia is ready to try. Unsubscribe anytime.</span>
         </div>
-        <p class="preview-copy" id="preview-copy">Preview only. Nothing is sent or saved.</p>
+        <p class="preview-copy preview-only" id="preview-copy">Preview only. Nothing is sent or saved.</p>
         <p class="form-status" role="status" tabindex="-1"></p>
         <noscript><p class="noscript-note">This preview form is off. All three messages are shown above.</p></noscript>
       </form>
     </div>
   </main>
+
   <footer class="site-footer shell"><span>Ioleia Inc. · Ottawa, Canada</span><span>© 2026 Ioleia Inc.</span></footer>
 </body>
 </html>
