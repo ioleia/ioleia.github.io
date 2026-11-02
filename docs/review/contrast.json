@@ -1,0 +1,58 @@
+[
+  {
+    "use": "body",
+    "foreground": "#bebbd1",
+    "background": "#09092b",
+    "ratio": 10.33,
+    "threshold": 4.5
+  },
+  {
+    "use": "headline",
+    "foreground": "#f8f1e8",
+    "background": "#09092b",
+    "ratio": 17.26,
+    "threshold": 4.5
+  },
+  {
+    "use": "form small",
+    "foreground": "#b9b0c9",
+    "background": "#14132d",
+    "ratio": 8.72,
+    "threshold": 4.5
+  },
+  {
+    "use": "study note",
+    "foreground": "#aaa3be",
+    "background": "#0b0b2c",
+    "ratio": 7.91,
+    "threshold": 4.5
+  },
+  {
+    "use": "caption conservative bright surface",
+    "foreground": "#b4acc8",
+    "background": "#281062",
+    "ratio": 7.22,
+    "threshold": 4.5
+  },
+  {
+    "use": "button",
+    "foreground": "#09092b",
+    "background": "#f8f1e8",
+    "ratio": 17.26,
+    "threshold": 4.5
+  },
+  {
+    "use": "input boundary",
+    "foreground": "#7b718d",
+    "background": "#14132d",
+    "ratio": 3.95,
+    "threshold": 3
+  },
+  {
+    "use": "focus",
+    "foreground": "#31dfff",
+    "background": "#14132d",
+    "ratio": 11.31,
+    "threshold": 3
+  }
+]

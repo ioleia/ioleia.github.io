@@ -1,0 +1,31 @@
+{
+  "status": "design-only; not implemented or persisted",
+  "form_id": "ioleia-prelaunch-updates",
+  "consent_version": "ioleia-prelaunch-v1-2026-11-02",
+  "consent_text": "Get occasional updates and be notified when Ioleia becomes available.",
+  "sender": "Ioleia Inc.",
+  "purpose": "occasional product updates and availability notification",
+  "required_inputs": ["email", "explicit_unchecked_by_default_consent"],
+  "optional_inputs": ["first_name"],
+  "future_server_record": {
+    "email": "validated subscription address",
+    "first_name": "optional; omit when blank",
+    "consent": {
+      "affirmative_action": "checkbox checked and form submitted",
+      "version": "server-recognized consent version",
+      "text": "exact server-owned copy presented for this version",
+      "source": "ioleia-public-website/early-access",
+      "received_at": "server-generated UTC timestamp",
+      "page_revision": "deployed website revision",
+      "subscription_status": "pending or confirmed according to the separately approved backend flow"
+    },
+    "withdrawal": "record unsubscribe status and server timestamp; enforce suppression"
+  },
+  "constraints": [
+    "The client does not authorize persistence; the approved backend must validate consent independently.",
+    "A join is separate from Alpha selection and creates no product account.",
+    "Do not collect IP address, user agent, or unrelated metadata by default.",
+    "Do not create this record from the preview form.",
+    "No production endpoint has been approved or wired in this branch."
+  ]
+}

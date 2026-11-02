@@ -1,0 +1,14 @@
+{
+  "assets/reference/approved-light-field-board.png": {
+    "sha256": "c143c55fabaefd0a22cdbdb6876f356275cba61ed2d65a617daa229557252511",
+    "bytes": 2143133
+  },
+  "assets/ioleia-a2-1-mark-dark.svg": {
+    "sha256": "954010847f96ffce37ba51d4a8a2f51df1b8db4360f995e112c26efc0abb53df",
+    "bytes": 19349
+  },
+  "docs/brand/ioleia-a2-1-master-monochrome.svg": {
+    "sha256": "91d8887574fdd73d124d251d641b6a23e2ce256a63ee71ffdb9db33c0511de98",
+    "bytes": 19345
+  }
+}
