@@ -1,27 +1,43 @@
-# A2.1 luminous rendering — single-scene refinement, 2 November 2026
+# A2.1 website orb treatment — founder refinement, 2 November 2026
 
-This supersedes the cropped-orb implementation described in `PROVENANCE-2026-11-02.md`, which is retained as historical evidence. A2.1 geometry is fixed. Rendering may change; geometry may not.
+A2.1 geometry is fixed. Rendering may change; geometry may not.
 
-## Source and exact geometry
+## Current displayed orb
 
-The website's displayed orb and favicon now use `assets/ioleia-a2-1-luminous.svg`. The hero does not crop the brand board. The board remains only a decorative Light Field reference.
+The website's header orb and main hero orb now use the same visual method:
 
-The canonical source is `docs/brand/ioleia-a2-1-master-monochrome.svg`, verified byte-for-byte against the archived file in `ioleia/god-agent` at commit `4533ae01ac54341b0fc082fd72a734a9ba08e054`.
+1. visual texture, colour, light density, and wispy depth come from the founder-approved Light Field brand-system reference at `assets/reference/approved-light-field-board.png`;
+2. the displayed pixels are constrained by the unchanged canonical A2.1 mask at `docs/brand/ioleia-a2-1-master-monochrome.svg`;
+3. CSS applies the same source crop and same mask at different sizes for the header and hero.
 
-- Canonical file SHA-256: `91d8887574fdd73d124d251d641b6a23e2ce256a63ee71ffdb9db33c0511de98`.
-- Exact `d` attribute SHA-256: `8fc6f627c8fe07d7985e6a1beeb8a067da87d8ec4190c0ee89bb477eb2091086`.
-- ViewBox remains `0 0 350 350`; even-odd fill and clip rules remain unchanged.
-- The new SVG contains one path definition, copied verbatim. Every rendered layer uses that path. The compound path's five subpaths remain intact; they encode the existing outer boundary and negative spaces, not five ribbons.
-- No retracing, path simplification, coordinate transform, generated logo concept, or rejected colour-v1 source is used.
+This replaces the prior website display based on `assets/ioleia-a2-1-luminous.svg`, which the founder judged too much like a coloured-in vector treatment. That SVG remains preserved for provenance/history and as evidence of the deterministic geometry experiment, but is no longer the approved website display treatment.
 
-## Rendering
+## Geometry authority
 
-`python3 tools/render-logo.py` reproducibly creates the asset after checking the canonical file and path hashes. The unchanged path is the final clip. Amber-to-magenta/violet light, cyan-to-blue/violet light, seeded translucent texture, soft inner-edge light, fine glass highlights, a restrained rim mask, and a small right-side highlight are applied inside it. The render is static; only three decorative CSS layers move on the page. No animated SVG filter or WebGL is used.
+Canonical source:
+`docs/brand/ioleia-a2-1-master-monochrome.svg`
 
-The two flowing presences, right-side handoff and transparent negative space remain those of the locked master. There is no third ribbon. Clipping all light preserves the negative space rather than blurring into it.
+Previously verified canonical identifiers:
+- file SHA-256: `91d8887574fdd73d124d251d641b6a23e2ce256a63ee71ffdb9db33c0511de98`;
+- exact path SHA-256: `8fc6f627c8fe07d7985e6a1beeb8a067da87d8ec4190c0ee89bb477eb2091086`.
 
-## Validation and status
+No retracing, simplification, coordinate rewrite, third ribbon, or alternate geometry is introduced by this website refinement.
 
-Direct path-string comparison and SHA-256 match pass. At 700×700, the browser raster comparison counted 79,671 canonical pixels, zero rendered pixels outside the canonical silhouette, and zero missing opaque interior pixels. Side-by-side visual review against the monochrome export confirms the same contour, handoff and two-flow arrangement. The comparison and full-scene captures are delivered with the exact final PR-head review bundle.
+## Visual authority
 
-This is the deterministic luminous rendering implemented for founder review, not a newly approved logo geometry or a claim that it reproduces every atmospheric pixel of the generated brand board. The geometry is established; the new rendering remains reviewable. Wordmark typography remains provisional.
+The approved brand-system board remains the rendering reference for:
+- volumetric orb depth;
+- soft internal refraction;
+- warm amber/magenta upper light;
+- cyan/blue/violet lower light;
+- reduced banding;
+- softer glass-like glow;
+- rich but restrained luminous density.
+
+The website uses that source only as visual texture. The A2.1 master remains the geometric authority.
+
+## Status
+
+Founder visual review is still required on the updated website preview before merge/deployment.
+
+Permanent wordmark typography remains provisional.
