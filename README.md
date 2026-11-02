@@ -1,9 +1,9 @@
 # Ioleia website — single-scene founder preview
 
 One continuous scene with:
-- the real A2.1 logo mark beside `ioleia` in the top-left header;
+- the original approved A2.1 raster artwork beside `ioleia` in the top-left header;
 - the approved luminous orb artwork as the centre visual;
-- a slow Light Field;
+- a plain midnight-indigo background;
 - three gently changing messages;
 - one constant email signup.
 
@@ -14,14 +14,17 @@ One continuous scene with:
 The header logo and centre orb are intentionally different roles:
 
 ### Header
-The small mark beside `ioleia` is the canonical A2.1 brand mark:
-`assets/ioleia-a2-1-mark-dark.svg`.
+The small mark beside `ioleia` uses the original approved source crop, without tracing, recolouring, filters, or opacity changes:
+`assets/ioleia-a2-1-approved-symbol.png`.
+It is byte-identical to `ioleia/god-agent`'s `docs/brand/a2-1-master/reference/approved-symbol-crop.png`, retaining the source's black symbol and pale panel.
 
 ### Centre
-The large centre orb is the approved luminous orb artwork from:
-`assets/reference/approved-light-field-board.png`.
+The large centre orb is a square, unscaled crop of the approved luminous artwork:
+`assets/ioleia-luminous-orb-centered.png`, from `assets/reference/approved-light-field-board.png` at `(120, 19, 504, 403)` (right/bottom exclusive).
 
-It is displayed as the visual centerpiece and is no longer forced through the A2.1 vector mask. This preserves the richer internal light, dimensional depth, and softer colour flow the founder approved.
+It is displayed without stretching, colour filters, or an A2.1 vector mask. A centered radial fade softens only the surrounding glow. The board is retained as provenance; the website no longer loads or displays its Light Field.
+
+See [the versioned visual-fix record](docs/brand/FOUNDER-VISUAL-FIXES-2026-11-02-v2.md) for source fidelity and validation. Earlier brand and review documents remain historical evidence.
 
 A2.1 remains the canonical logo geometry for the actual brand mark and app-icon geometry. The luminous centre orb is the expressive visual object used by the website.
 

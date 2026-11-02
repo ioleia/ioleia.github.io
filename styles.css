@@ -11,7 +11,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex="-1"]:focus-v
 
 .site-header{min-height:74px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
 .brand-lockup{display:inline-flex;align-items:center;gap:10px;justify-self:start}
-.brand-mark{display:block;width:30px;height:30px;opacity:.92;filter:drop-shadow(0 0 5px rgba(166,132,255,.16))}
+.brand-mark{display:block;width:30px;height:30px}
 .wordmark{font:400 29px/1.1 Georgia,"Times New Roman",serif;letter-spacing:.12em}
 .preview-notice{color:var(--soft);font-size:10px;letter-spacing:.04em;text-align:center}
 .motion-control{justify-self:end;min-height:44px;padding:8px 0 8px 12px;border:0;background:none;color:var(--muted);font-size:11px}
@@ -23,17 +23,14 @@ main{flex:1;display:grid;place-items:center;padding:12px 24px 24px;outline:none}
 .orb-art{
   display:block;
   width:clamp(170px,23vh,218px);
+  height:auto;
   aspect-ratio:1;
   flex:none;
   margin-bottom:22px;
-  background-image:url('./assets/reference/approved-light-field-board.png');
-  background-repeat:no-repeat;
-  background-size:389% 273%;
-  background-position:10.5% 3.1%;
-  border-radius:50%;
-  -webkit-mask-image:radial-gradient(circle at center,#000 0 83%,rgba(0,0,0,.96) 88%,transparent 100%);
-  mask-image:radial-gradient(circle at center,#000 0 83%,rgba(0,0,0,.96) 88%,transparent 100%);
-  filter:saturate(1.02) brightness(.96) drop-shadow(0 0 18px rgba(112,86,255,.28));
+  object-fit:contain;
+  /* Square source crop; preserve original pixels and fade only the surrounding glow. */
+  -webkit-mask-image:radial-gradient(circle closest-side at center,#000 0 90%,transparent 96%);
+  mask-image:radial-gradient(circle closest-side at center,#000 0 90%,transparent 96%);
 }
 
 h1,h2,p{margin:0}
@@ -60,16 +57,7 @@ body:not(.enhanced) .signup-form{margin-top:32px}
 .preview-copy{margin-top:8px;color:var(--soft);font-size:10px}
 .form-status:not(:empty){margin:12px auto 0;max-width:520px;padding:10px 14px;border-left:2px solid #ad90df;background:#201b3a;color:var(--ivory);font-size:12px}
 .noscript-note{margin-top:12px;font-size:12px;color:var(--soft)}
-.site-footer{display:flex;justify-content:space-between;gap:16px;padding:18px 0 20px;color:var(--soft);font-size:10px}
-
-.light-field{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--bg)}
-.field-haze,.field-flow,.field-glimmer{position:absolute;inset:-6%;animation:drift 46s ease-in-out infinite alternate;animation-play-state:paused}
-.field-haze{background:radial-gradient(ellipse at 16% 58%,#28106280,transparent 42%),radial-gradient(ellipse at 84% 48%,#52205f48,transparent 40%),radial-gradient(ellipse at 54% 80%,#173d6740,transparent 40%)}
-.field-flow{background-image:url('./assets/reference/approved-light-field-board.png');background-repeat:no-repeat;background-size:190% 430%;background-position:89% 17%;opacity:.3;mask-image:linear-gradient(transparent 10%,#000 40%,#000 70%,transparent);animation-duration:41s}
-.field-glimmer{background:radial-gradient(ellipse at 78% 67%,#ffb45d18,transparent 14%),radial-gradient(ellipse at 22% 69%,#31dfff1f,transparent 18%);animation-duration:32s}
-.light-field:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,#09092bf0 5%,#09092b9c 38%,transparent 76%)}
-.enhanced:not(.motion-paused) .light-field>div{animation-play-state:running}
-@keyframes drift{from{transform:translate3d(-1%,.6%,0) scale(1.02)}to{transform:translate3d(1%,-.8%,0) scale(1.04)}}
+.site-footer{display:flex;justify-content:flex-end;gap:16px;padding:18px 0 20px;color:var(--soft);font-size:10px}
 
 @media(max-width:800px){.shell{width:calc(100% - 48px)}h2{font-size:46px}.orb-art{width:178px}}
 @media(max-width:560px){
@@ -109,11 +97,10 @@ body:not(.enhanced) .signup-form{margin-top:32px}
 }
 @media(prefers-reduced-motion:reduce){
  *,*:before,*:after{animation:none!important;transition:none!important}
- .light-field>div{transform:none}
  .motion-control{display:none}
 }
 @media(forced-colors:active){
- .light-field,.orb-art{display:none}
+ .orb-art{display:none}
  .signup-row input,.button{border:1px solid ButtonText}
  .message-controls span{background:GrayText}
  .message-controls [aria-pressed="true"] span{background:CanvasText}
