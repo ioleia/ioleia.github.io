@@ -3,122 +3,76 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Meet Ioleia, an AI that gets to know you over time. Join early access to be among the first to try it on iPhone.">
+  <meta name="description" content="Meet Ioleia. An AI that gets to know you. Coming first to iPhone.">
   <meta name="theme-color" content="#09092b">
   <meta name="robots" content="noindex, nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
   <title>Ioleia — An AI that gets to know you</title>
-  <link rel="icon" href="./assets/ioleia-a2-1-mark-dark.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/ioleia-a2-1-luminous.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <script src="./preview.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="preview-notice">Design preview <span aria-hidden="true">·</span> Signups are not live</div>
-
-  <header class="site-header">
-    <div class="shell header-row">
-      <a class="brand" href="#top" aria-label="Ioleia home">
-        <img src="./assets/ioleia-a2-1-mark-dark.svg" width="30" height="30" alt="">
-        <span class="wordmark">ioleia</span>
-      </a>
-      <button class="motion-control" id="motion-control" type="button" aria-pressed="false" hidden>
-        <span aria-hidden="true">Ⅱ</span> Pause motion
-      </button>
-    </div>
+  <div class="light-field" aria-hidden="true"><div class="field-haze"></div><div class="field-flow"></div><div class="field-glimmer"></div></div>
+  <header class="site-header shell">
+    <span class="wordmark" aria-label="Ioleia">ioleia</span>
+    <span class="preview-notice">Design preview · Signups are not live</span>
+    <button class="motion-control" id="motion-control" type="button" aria-pressed="false" hidden>Pause motion</button>
   </header>
-
-  <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="light-field hero-field" aria-hidden="true">
-        <div class="field-haze"></div>
-        <div class="field-flow"></div>
-        <div class="field-glimmer"></div>
+  <main id="main" tabindex="-1">
+    <div class="scene">
+      <img class="orb-art" src="./assets/ioleia-a2-1-luminous.svg" width="350" height="350" alt="Ioleia luminous orb — two flowing presences">
+      <h1 class="sr-only">Meet Ioleia</h1>
+      <div class="messages" id="messages" aria-live="off">
+        <section class="moment" aria-labelledby="moment-one" data-dwell="16000">
+          <h2 id="moment-one">Hi. I’m Ioleia.</h2>
+          <p class="subhead">An AI that gets to know you.</p>
+          <div class="message-copy">
+            <p>Tell me about your life.</p>
+            <p>The people you care about. What you’re working on. The little things that make you, you.</p>
+            <p class="emphasis">When you come back, you won’t have to explain it all again.</p>
+          </div>
+        </section>
+        <section class="moment" aria-labelledby="moment-two" data-dwell="20000">
+          <h2 id="moment-two">I won’t just agree with you.</h2>
+          <p class="subhead">I’ll help you think things through.</p>
+          <div class="message-copy">
+            <p>I can remember what matters, learn your sense of humour, and get better at knowing when you want help — and when you just want to talk.</p>
+            <p class="emphasis">And sometimes, I’ll disagree.</p>
+            <p>I’m AI, not a person. I’ll be honest about that.</p>
+          </div>
+        </section>
+        <section class="moment" aria-labelledby="moment-three" data-dwell="14000">
+          <h2 id="moment-three">We haven’t met yet.</h2>
+          <p class="subhead">I’m still being built.</p>
+          <div class="message-copy">
+            <p>If you’d like to be one of the first people to try Ioleia, leave your email.</p>
+            <p class="emphasis">I’ll let you know when it’s time to say hello.</p>
+          </div>
+        </section>
       </div>
-
-      <div class="shell hero-content">
-        <div class="orb-art" role="img" aria-label="Ioleia luminous orb"></div>
-
-        <h1 id="hero-title">Hi. I’m Ioleia.</h1>
-        <p class="hero-subhead">An AI that gets to know you.</p>
-
-        <div class="hero-copy">
-          <p>Tell me about your life.</p>
-          <p>The people you care about. What you’re working on. The little things that make you, you.</p>
-          <p class="benefit">When you come back, you won’t have to explain it all again.</p>
+      <div class="message-controls" role="group" aria-label="Read at your own pace" hidden>
+        <button type="button" aria-label="Read message 1: Hi. I’m Ioleia." aria-controls="messages" aria-pressed="true"><span></span></button>
+        <button type="button" aria-label="Read message 2: I won’t just agree with you." aria-controls="messages" aria-pressed="false"><span></span></button>
+        <button type="button" aria-label="Read message 3: We haven’t met yet." aria-controls="messages" aria-pressed="false"><span></span></button>
+      </div>
+      <form class="signup-form" id="signup-form" aria-describedby="signup-copy preview-copy" autocomplete="off">
+        <div class="signup-row">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" type="email" autocomplete="off" inputmode="email" maxlength="254" placeholder="Your email" required disabled>
+          <button class="button" id="preview-submit" type="submit" disabled>Join early access</button>
         </div>
-
-        <form class="signup-form hero-signup" data-preview-signup aria-describedby="hero-signup-copy">
-          <div class="signup-row">
-            <label class="sr-only" for="hero-email">Email</label>
-            <input id="hero-email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="Your email" required>
-            <button class="button primary preview-submit" type="submit" disabled>Join early access</button>
-          </div>
-          <div class="signup-meta" id="hero-signup-copy">
-            <span>Coming first to iPhone.</span>
-            <span>I’ll email you when Ioleia is ready to try. Unsubscribe anytime.</span>
-          </div>
-          <p class="form-status" role="status" tabindex="-1"></p>
-          <noscript><p class="noscript-note">This is a non-live preview. Nothing is collected.</p></noscript>
-        </form>
-      </div>
-    </section>
-
-    <section class="story honesty" aria-labelledby="honesty-title">
-      <div class="light-field honesty-field" aria-hidden="true">
-        <div class="field-haze"></div>
-        <div class="field-flow"></div>
-        <div class="field-glimmer"></div>
-      </div>
-
-      <div class="shell story-copy">
-        <h2 id="honesty-title">I won’t just agree with you.</h2>
-        <p>I’ll help you think things through.</p>
-        <p>I can remember what matters, learn your sense of humour, and get better at knowing when you want help — and when you just want to talk.</p>
-        <p class="emphasis">And sometimes, I’ll disagree.</p>
-        <p>I’m AI, not a person. I’ll be honest about that.</p>
-      </div>
-    </section>
-
-    <section class="story meet" aria-labelledby="meet-title">
-      <div class="light-field meet-field" aria-hidden="true">
-        <div class="field-haze"></div>
-        <div class="field-flow"></div>
-        <div class="field-glimmer"></div>
-      </div>
-
-      <div class="shell meet-content">
-        <h2 id="meet-title">We haven’t met yet.</h2>
-        <p>I’m still being built.</p>
-        <p>If you’d like to be one of the first people to try Ioleia, leave your email.</p>
-        <p class="meet-line">I’ll let you know when it’s time to say hello.</p>
-
-        <form class="signup-form bottom-signup" data-preview-signup aria-describedby="bottom-signup-copy">
-          <div class="signup-row">
-            <label class="sr-only" for="bottom-email">Email</label>
-            <input id="bottom-email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="Your email" required>
-            <button class="button primary preview-submit" type="submit" disabled>Join early access</button>
-          </div>
-          <div class="signup-meta" id="bottom-signup-copy">
-            <span>Coming first to iPhone.</span>
-            <span>Unsubscribe anytime.</span>
-          </div>
-          <p class="form-status" role="status" tabindex="-1"></p>
-          <noscript><p class="noscript-note">This is a non-live preview. Nothing is collected.</p></noscript>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-row">
-      <div class="footer-brand">
-        <img src="./assets/ioleia-a2-1-mark-dark.svg" width="25" height="25" alt="">
-        <span class="wordmark">ioleia</span>
-      </div>
-      <span>Ioleia Inc. · Ottawa, Canada</span>
-      <span>© 2026 Ioleia Inc.</span>
+        <div class="signup-meta" id="signup-copy">
+          <span>Coming first to iPhone.</span>
+          <span>I’ll email you when Ioleia is ready to try. Unsubscribe anytime.</span>
+        </div>
+        <p class="preview-copy" id="preview-copy">Preview only. Nothing is sent or saved.</p>
+        <p class="form-status" role="status" tabindex="-1"></p>
+        <noscript><p class="noscript-note">This preview form is off. All three messages are shown above.</p></noscript>
+      </form>
     </div>
-  </footer>
+  </main>
+  <footer class="site-footer shell"><span>Ioleia Inc. · Ottawa, Canada</span><span>© 2026 Ioleia Inc.</span></footer>
 </body>
 </html>

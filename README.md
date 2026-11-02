@@ -1,54 +1,31 @@
-# Ioleia website — founder review preview
+# Ioleia website — single-scene founder preview
 
-A buildless, one-page founder-review preview. **Signups are not live. Do not merge or deploy this branch yet.**
+One continuous scene with a fixed A2.1 orb, a slow Light Field, three gently changing messages, and one constant email signup. **Preview only. Keep PR #2 draft; do not merge or deploy.**
 
-## Current direction
+Open `index.html` locally in a browser. All runtime assets are relative local files; no build, server, font service, or internet connection is required. Keep `styles.css`, `preview.js`, and `assets/` beside the page. The supplied offline review bundle contains the same runtime files from the final PR head.
 
-The page is intentionally minimal:
+## Message and interaction behavior
 
-1. Meet Ioleia and understand the core promise.
-2. See the honesty/difference statement.
-3. Join the early-access list.
+The approved copy is unchanged. Moments 1, 2, and 3 dwell for 16, 20, and 14 seconds, followed by 1.2-second opacity crossfades. The sequence loops. A shared grid reserves the tallest message's height, so the orb and signup stay in place. Three small indicators offer direct, nonanimated access to the messages and stop automatic motion.
 
-There are no section tabs, feature grids, Light Field explanations, product jargon, or competing marketing calls to action.
+Pause Motion freezes both the Light Field and message rotation, including an in-progress fade. Focusing the form also freezes both. Leaving an untouched, empty form resumes with a full reading interval. Typing, an invalid submission, or a completed preview submission keeps motion paused until an explicit Resume Motion action. Hidden pages pause timers and running animations; returning preserves the remaining dwell or fade.
 
-The only marketing action is **Join early access**, with the email field available in the hero and repeated at the bottom for visitors who decide after scrolling.
-
-Public copy is first-person Ioleia voice, short and plain-language. It does not use “Alpha” or “AI companion” as marketing positioning.
+Reduced motion starts at Moment 1 with no animation. All three messages remain accessible through the labelled indicators without animation. With JavaScript disabled, all messages are readable in normal document flow; the form is disabled and explains its preview status. Small or short screens may scroll naturally; content is never clipped to a fixed screen height.
 
 ## Signup boundary
 
-Both email forms are **preview-only**.
+There is exactly one email input and one **Join early access** button. There is no first-name field, checkbox, or second marketing CTA. Supporting copy remains “Coming first to iPhone.” and “I’ll email you when Ioleia is ready to try. Unsubscribe anytime.”
 
-- email only;
-- no first-name field;
-- no consent checkbox in the founder-approved UX direction;
-- no network request;
-- no storage;
-- no cookies;
-- no analytics;
-- no endpoint;
-- CSP blocks connections and form submission;
-- JavaScript-disabled state leaves submit controls disabled.
+The form uses native email validation. Valid submission only shows “Preview complete. Nothing was sent or saved, and you have not joined a list.” It clears the field and focuses that confirmation. No email is transmitted, persisted, logged, or echoed. Autocomplete is disabled in this preview. There is no endpoint, network API, analytics, cookie, or storage access. CSP blocks connections and all form submissions even if the script fails. Future production subscription work remains separate; `docs/signup-consent-contract.json` is still a proposal, not an implemented service.
 
-The production signup flow still requires the separately approved backend, unsubscribe handling, final disclosure text, and legal/CASL review. This preview does not claim legal sufficiency.
+## Brand and review evidence
 
-## Brand and motion
+The hero and favicon use the exact canonical A2.1 path with a deterministic luminous treatment. See `docs/brand/PROVENANCE-SINGLE-SCENE-2026-11-02.md`. The generated board is used only for the approved atmospheric Light Field. Rejected colour-v1 assets are absent. Permanent wordmark typography remains undecided.
 
-The page continues to use the approved luminous orb and wispy Light Field reference. A2.1 remains the canonical geometry authority. Rejected `colour-v1` assets are not used.
+See `docs/review/VALIDATION-SINGLE-SCENE-2026-11-02.md`. Earlier review documents and screenshots are preserved as history; they are not evidence for this scene. Fresh screenshots and an offline bundle are captured from the exact final PR head and delivered separately to avoid a self-referential screenshot commit.
 
-The Light Field is visual only; the page does not explain it. Motion is slow and decorative, pauses when hidden/offscreen, includes a pause control, and respects reduced-motion preferences.
+To run browser checks, use an installed Playwright package: `node tests/scene.spec.cjs`. `PLAYWRIGHT_MODULE`, `BROWSER_PATH`, and `QA_OUTPUT` may select local tooling and output paths. No dependencies are loaded by the website.
 
-The permanent wordmark typeface remains unapproved. The current Georgia/system-serif treatment is provisional.
+## Deployment boundary
 
-## Review and validation
-
-See `docs/review/VALIDATION-2026-11-02.md`.
-
-The older screenshot files under `docs/review/` are retained as historical evidence from the earlier, more complex layout. They do **not** represent this final simplified copy/layout and must not be used as founder visual approval.
-
-## Live boundary
-
-The public rollback remains GitHub Pages on `main` at the existing live site. This draft branch contains no deployment workflow or production integration.
-
-Do not merge, deploy, switch hosting, or change DNS/email records until founder visual approval and the separately authorized hosting/signup work are complete.
+This branch adds no deployment workflow or production integration. `CNAME`, main, hosting, DNS, email records, AWS, SES, Cognito, Apple, and other production systems are outside this refinement and must remain untouched.
