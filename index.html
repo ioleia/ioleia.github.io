@@ -3,160 +3,157 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ioleia Inc. is a Canadian technology company developing a deeply personal AI companion designed to be truthful, non-manipulative, and protective of human agency.">
-  <title>Ioleia — Ioleia Inc.</title>
-  <style>
-    :root { color-scheme: light; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #faf9f6;
-      color: #232a29;
-      font: 18px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    a { color: inherit; }
-    header, main, footer {
-      width: min(100% - 3rem, 52rem);
-      margin-inline: auto;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      gap: 1.5rem;
-      align-items: center;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid #d9d7d0;
-    }
-    .brand {
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-    nav { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.95rem; }
-    nav a { text-decoration: none; }
-    nav a:hover, nav a:focus { text-decoration: underline; }
-    main { padding: 5rem 0 4rem; }
-    .hero { padding-bottom: 4rem; }
-    h1 {
-      max-width: 12ch;
-      margin: 0 0 1.5rem;
-      font-size: clamp(2.8rem, 8vw, 5.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.055em;
-    }
-    h2 {
-      margin: 0 0 1rem;
-      font-size: 1.6rem;
-      line-height: 1.25;
-      letter-spacing: -0.025em;
-    }
-    p { margin: 0 0 1rem; }
-    .lede { max-width: 42rem; font-size: 1.25rem; }
-    .status {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.35rem 0.7rem;
-      border: 1px solid #b9b6ad;
-      border-radius: 999px;
-      font-size: 0.88rem;
-    }
-    section {
-      padding: 2.4rem 0;
-      border-top: 1px solid #d9d7d0;
-    }
-    .details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-      gap: 1.25rem 2rem;
-      margin-top: 1.5rem;
-    }
-    .label {
-      display: block;
-      margin-bottom: 0.2rem;
-      color: #646b68;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    footer {
-      padding: 2rem 0 3rem;
-      border-top: 1px solid #d9d7d0;
-      color: #535b59;
-      font-size: 0.88rem;
-    }
-  </style>
+  <meta name="description" content="Ioleia is building a deeply personal AI companion designed for meaningful continuity, truthfulness, human agency, and strong privacy and security requirements.">
+  <meta name="theme-color" content="#f7f6f2">
+  <title>Ioleia — A more personal kind of AI</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header>
-    <a class="brand" href="#top" aria-label="Ioleia home">Ioleia</a>
-    <nav aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#product">Product</a>
-      <a href="#company">Company</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Ioleia home">
+        <img class="brand-mark" src="/logo-mark.svg" alt="">
+        <span>Ioleia</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#product">What we're building</a>
+        <a href="#principles">Principles</a>
+        <a href="#company">Company</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main id="top">
-    <div class="hero">
-      <h1>A more personal kind of AI.</h1>
-      <p class="lede">Ioleia Inc. is developing a deeply personal AI companion designed to be truthful, non-manipulative, and protective of human agency.</p>
-      <span class="status">Private Alpha in development</span>
-    </div>
-
-    <section id="about">
-      <h2>About Ioleia</h2>
-      <p>Ioleia Inc. is a Canadian technology company building an AI companion intended to develop meaningful continuity with the person using it while remaining honest about what it is and careful with human autonomy.</p>
-      <p>The company is currently focused on preparing its first private Alpha and the security, privacy, identity, and reliability work required before real users are admitted.</p>
+    <section class="shell hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">Private Alpha in development</div>
+        <h1 id="hero-title">A more personal kind of AI.</h1>
+        <p>Ioleia is building a deeply personal AI companion designed to remember what matters, understand context over time, and develop meaningful continuity with the person using it — while remaining truthful, non-manipulative, and protective of human agency.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#product">What we're building</a>
+          <a class="button secondary" href="#contact">Contact Ioleia</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="orb-ring"></div>
+        <div class="orb-ring two"></div>
+      </div>
     </section>
 
-    <section id="product">
-      <h2>What we are building</h2>
-      <p>Ioleia is being designed as a personal AI companion that can remember relevant context, understand the meaning behind a conversation, and build continuity over time.</p>
-      <p>The private Alpha will be invitation-only. Ioleia is not currently offering public account creation, public subscriptions, or general consumer access.</p>
-    </section>
-
-    <section id="company">
-      <h2>Company</h2>
-      <p>Ioleia Inc. is a federally incorporated Canadian corporation operating remotely from Ottawa, Ontario.</p>
-      <div class="details">
+    <section class="section" id="product">
+      <div class="shell section-grid">
         <div>
-          <span class="label">Legal name</span>
-          Ioleia Inc.
+          <div class="eyebrow">What we're building</div>
+          <h2>Not just another chat window.</h2>
         </div>
-        <div>
-          <span class="label">Location</span>
-          Ottawa, Ontario, Canada
-        </div>
-        <div>
-          <span class="label">Stage</span>
-          Private Alpha development
+        <div class="section-copy">
+          <p>Ioleia is being built as a personal AI companion with continuity. The goal is not a string of disconnected chats, but an experience that can understand the meaning behind a conversation, remember relevant context, and become more useful and personal over time.</p>
+          <p>The product is being developed for iPhone first. Early real-user testing has already informed the experience, and a small invitation-only private Alpha is now being prepared.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Continuity</h3>
+              <p>Remembering what matters and carrying useful context forward instead of starting from zero every time.</p>
+            </article>
+            <article class="card">
+              <h3>Understanding</h3>
+              <p>Working with conversation, memory, and images in context rather than treating each input as an isolated prompt.</p>
+            </article>
+            <article class="card">
+              <h3>Relationship</h3>
+              <p>Designed to feel increasingly personal without pretending to be human or taking control away from the person using it.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>For company, developer-program, or business inquiries:</p>
-      <div class="details">
+    <section class="section" id="principles">
+      <div class="shell section-grid">
         <div>
-          <span class="label">Email</span>
-          <a href="mailto:heather@ioleia.com">heather@ioleia.com</a>
+          <div class="eyebrow">Principles</div>
+          <h2>The relationship matters. So do the boundaries.</h2>
         </div>
-        <div>
-          <span class="label">Phone</span>
-          <a href="tel:+16134163919">+1 613-416-3919</a>
+        <div class="section-copy">
+          <div class="cards">
+            <article class="card">
+              <h3>Truthful by design</h3>
+              <p>Ioleia should not invent certainty, manipulate a person, or misrepresent what it is.</p>
+            </article>
+            <article class="card">
+              <h3>Human agency matters</h3>
+              <p>The person remains in charge of their choices, their information, and their relationship with the product.</p>
+            </article>
+            <article class="card">
+              <h3>Continuity should be earned</h3>
+              <p>Personalization should come from real, permitted context and memory — not from pretending a relationship exists when it does not.</p>
+            </article>
+          </div>
+          <p class="quote">Privacy and security are release requirements, not marketing decoration. Ioleia is qualifying those systems before admitting real Alpha users.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="company">
+      <div class="shell status-panel">
         <div>
-          <span class="label">Website</span>
-          <a href="https://ioleia.com">ioleia.com</a>
+          <span class="status-pill">Current stage</span>
+          <h2 style="margin-top:18px;max-width:12ch">Preparing the first private Alpha.</h2>
+          <p>Ioleia is not open for public account creation yet. Live access is intentionally limited while authentication, privacy, security, and production AI routing are being qualified for the real Alpha path.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><small>Company</small>Ioleia Inc.</div>
+          <div class="fact"><small>Location</small>Ottawa, Ontario, Canada</div>
+          <div class="fact"><small>Stage</small>Private Alpha development</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="shell section-grid">
+        <div>
+          <div class="eyebrow">About Ioleia</div>
+          <h2>Canadian, founder-led, and building deliberately.</h2>
+        </div>
+        <div class="section-copy">
+          <p>Ioleia Inc. is a federally incorporated Canadian technology company based in Ottawa, Ontario. The company is woman-founded and focused on creating a deeply personal AI companion while protecting truthfulness, privacy, and human agency.</p>
+          <p>We have a working iPhone product, have completed early real-user testing, and are preparing a small invitation-only private Alpha.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell contact-grid">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2>Talk to Ioleia.</h2>
+          <p class="section-copy">For company, partnership, developer-program, legal, advisory, or business inquiries, contact us directly.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <small>Email</small>
+            <a href="mailto:heather@ioleia.com">heather@ioleia.com</a>
+          </div>
+          <div class="contact-item">
+            <small>Phone</small>
+            <a href="tel:+16134163919">+1 613-416-3919</a>
+          </div>
+          <div class="contact-item">
+            <small>Location</small>
+            Ottawa, Ontario, Canada
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    © 2026 Ioleia Inc. All rights reserved.
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span>© 2026 Ioleia Inc. All rights reserved.</span>
+      <span>Private Alpha in development.</span>
+    </div>
   </footer>
 </body>
 </html>
