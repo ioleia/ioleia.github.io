@@ -1,43 +1,51 @@
-# A2.1 website orb treatment — founder refinement, 2 November 2026
+# Website brand hierarchy — 2 November 2026
 
-A2.1 geometry is fixed. Rendering may change; geometry may not.
+## Founder clarification
 
-## Current displayed orb
+The website uses two related but distinct brand elements:
 
-The website's header orb and main hero orb now use the same visual method:
+1. **Header logo:** the canonical A2.1 mark beside the word `ioleia`.
+2. **Centre visual:** the founder-approved luminous orb artwork.
 
-1. visual texture, colour, light density, and wispy depth come from the founder-approved Light Field brand-system reference at `assets/reference/approved-light-field-board.png`;
-2. the displayed pixels are constrained by the unchanged canonical A2.1 mask at `docs/brand/ioleia-a2-1-master-monochrome.svg`;
-3. CSS applies the same source crop and same mask at different sizes for the header and hero.
+The centre orb is not the small A2.1 header mark enlarged.
 
-This replaces the prior website display based on `assets/ioleia-a2-1-luminous.svg`, which the founder judged too much like a coloured-in vector treatment. That SVG remains preserved for provenance/history and as evidence of the deterministic geometry experiment, but is no longer the approved website display treatment.
+## Header logo authority
 
-## Geometry authority
+Header asset:
+`assets/ioleia-a2-1-mark-dark.svg`
 
-Canonical source:
-`docs/brand/ioleia-a2-1-master-monochrome.svg`
+A2.1 remains the permanent logo geometry.
 
-Previously verified canonical identifiers:
-- file SHA-256: `91d8887574fdd73d124d251d641b6a23e2ce256a63ee71ffdb9db33c0511de98`;
+Previously verified identifiers:
+- canonical file SHA-256: `91d8887574fdd73d124d251d641b6a23e2ce256a63ee71ffdb9db33c0511de98`;
 - exact path SHA-256: `8fc6f627c8fe07d7985e6a1beeb8a067da87d8ec4190c0ee89bb477eb2091086`.
 
-No retracing, simplification, coordinate rewrite, third ribbon, or alternate geometry is introduced by this website refinement.
+## Centre orb visual authority
 
-## Visual authority
+Centre visual source:
+`assets/reference/approved-light-field-board.png`
 
-The approved brand-system board remains the rendering reference for:
-- volumetric orb depth;
-- soft internal refraction;
-- warm amber/magenta upper light;
-- cyan/blue/violet lower light;
-- reduced banding;
-- softer glass-like glow;
-- rich but restrained luminous density.
+This is the luminous orb treatment the founder approved for its:
+- internal light complexity;
+- soft translucent flow;
+- dimensional orb feeling;
+- lower banding;
+- warm amber/magenta + cool cyan/blue/violet balance.
 
-The website uses that source only as visual texture. The A2.1 master remains the geometric authority.
+The centre orb is displayed directly from this approved artwork crop with a soft circular edge. It is not regenerated and not forced into the deterministic coloured-vector treatment.
 
-## Status
+## Superseded website experiments
 
-Founder visual review is still required on the updated website preview before merge/deployment.
+The following are not the current website display treatment:
+- cropped orb used without the restored header logo;
+- deterministic `ioleia-a2-1-luminous.svg` as the large central visual;
+- board texture forced through the A2.1 mask for both header and centre;
+- rejected `colour-v1`.
+
+All remain preserved as historical design/implementation evidence where present.
+
+## Production boundary
+
+Founder visual approval is still required before website merge/deployment.
 
 Permanent wordmark typography remains provisional.
