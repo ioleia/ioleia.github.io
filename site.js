@@ -1,6 +1,6 @@
 'use strict';
 
-// Offline preview: no endpoint, network API, cookie, or storage access.
+// Same approved message behavior, with a bounded email-only signup POST.
 (() => {
   const body = document.body;
   const moments = [...document.querySelectorAll('.moment')];
@@ -9,8 +9,13 @@
   const motion = document.querySelector('#motion-control');
   const form = document.querySelector('#signup-form');
   const email = document.querySelector('#email');
-  const submit = document.querySelector('#preview-submit');
+  const submit = document.querySelector('#signup-submit');
   const status = form.querySelector('.form-status');
+  const config = window.IOLEIA_SIGNUP;
+  const ready = config && typeof config.endpoint === 'string' &&
+    /^https:\/\/[a-z0-9]+\.execute-api\.ca-central-1\.amazonaws\.com\/early-access$/.test(config.endpoint) &&
+    config.consentVersion === 'ioleia-early-access-v3-2026-11-02';
+  let submitting = false;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let current = 0;
   let explicitlyPaused = false;
@@ -110,14 +115,40 @@
     syncMotion();
   });
   form.addEventListener('invalid', () => {interactionPaused = true; syncMotion();}, true);
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
     interactionPaused = true;
     syncMotion();
-    if (!form.reportValidity()) return;
-    status.textContent = 'Preview complete. Nothing was sent or saved, and you have not joined a list.';
-    form.reset();
-    status.focus();
+    if (!ready || submitting || !form.reportValidity()) return;
+    submitting = true;
+    email.disabled = true;
+    submit.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    status.textContent = 'Joining…';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    try {
+      const response = await fetch(config.endpoint, {
+        method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store',
+        referrerPolicy: 'no-referrer', redirect: 'error', signal: controller.signal,
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email.value, consent_version: config.consentVersion})
+      });
+      if (!response.ok) throw new Error('Signup unavailable');
+      const result = await response.json();
+      if (result.message !== 'Thanks. Your early-access request has been received.') throw new Error('Unexpected response');
+      status.textContent = result.message;
+      form.reset();
+    } catch (_) {
+      status.textContent = 'We couldn’t save that just now. Please try again.';
+    } finally {
+      clearTimeout(timeout);
+      submitting = false;
+      email.disabled = false;
+      submit.disabled = false;
+      form.removeAttribute('aria-busy');
+      status.focus();
+    }
   });
   reduced.addEventListener('change', () => {
     if (reduced.matches) show(0, false);
@@ -129,7 +160,7 @@
   markCurrent();
   body.classList.add('enhanced');
   controls.hidden = false;
-  email.disabled = false;
-  submit.disabled = false;
+  email.disabled = !ready;
+  submit.disabled = !ready;
   syncMotion();
 })();

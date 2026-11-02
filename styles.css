@@ -14,7 +14,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex="-1"]:focus-v
 .brand-mark{display:block;width:30px;height:30px}
 .wordmark{font:400 29px/1.1 Georgia,"Times New Roman",serif;letter-spacing:.12em}
 .preview-notice{color:var(--soft);font-size:10px;letter-spacing:.04em;text-align:center}
-.motion-control{justify-self:end;min-height:44px;padding:8px 0 8px 12px;border:0;background:none;color:var(--muted);font-size:11px}
+.motion-control{grid-column:3;justify-self:end;min-height:44px;padding:8px 0 8px 12px;border:0;background:none;color:var(--muted);font-size:11px}
 
 main{flex:1;display:grid;place-items:center;padding:12px 24px 24px;outline:none}
 .scene{width:min(100%,760px);display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -105,3 +105,5 @@ body:not(.enhanced) .signup-form{margin-top:32px}
  .message-controls span{background:GrayText}
  .message-controls [aria-pressed="true"] span{background:CanvasText}
 }
+
+.privacy-main{display:block;width:min(calc(100% - 40px),680px);margin:auto;padding:64px 0}.privacy-main h1{font:400 38px/1.2 Georgia,serif;margin-bottom:28px}.privacy-main p{margin:0 0 22px}.privacy-main a{text-underline-offset:3px}

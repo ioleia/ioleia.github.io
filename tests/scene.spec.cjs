@@ -7,14 +7,25 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = process.env.QA_OUTPUT || '/private/tmp/ioleia-scene-qa';
 fs.mkdirSync(output, {recursive:true});
-const url = 'file://' + path.join(root, 'index.html');
-const report = {checks:[], layouts:[], externalRequests:[], consoleErrors:[], pageErrors:[]};
+const url = process.env.QA_URL;
+assert.ok(url, 'QA_URL must point to a local production-build fixture');
+const endpoint = 'https://pending1234.execute-api.ca-central-1.amazonaws.com/early-access';
+let failRequest = false;
+const submissions = [];
+const SUCCESS = 'Thanks. Your early-access request has been received.';
+const report = {scope:'Offline production-build fixture; API requests intercepted, no AWS calls', checks:[], layouts:[], externalRequests:[], consoleErrors:[], pageErrors:[]};
 function check(name, condition) {assert.ok(condition, name); report.checks.push(name);}
 (async () => {
   const browser = await chromium.launch({headless:true, ...(process.env.BROWSER_PATH ? {executablePath:process.env.BROWSER_PATH} : {})});
   try {
     const context = await browser.newContext();
-    context.on('request', req => {if (/^https?:/.test(req.url())) report.externalRequests.push(req.url());});
+    await context.route(endpoint, async route => {
+      const req = route.request();
+      const body = JSON.parse(req.postData());
+      submissions.push({method:req.method(), url:req.url(), keys:Object.keys(body), consent:body.consent_version, addressMatches:body.email==='reader@example.com'});
+      await route.fulfill({status:failRequest?503:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(url).origin},body:JSON.stringify({message:failRequest?'Unavailable':SUCCESS})});
+    });
+    context.on('request', req => {if (/^https?:/.test(req.url()) && !req.url().startsWith(new URL(url).origin+'/') && req.url()!==endpoint) report.externalRequests.push(req.url());});
     context.on('page', page => {
       page.on('console', msg => {if(msg.type()==='error') report.consoleErrors.push(msg.text());});
       page.on('pageerror', err => report.pageErrors.push(err.message));
@@ -63,10 +74,22 @@ function check(name, condition) {assert.ok(condition, name); report.checks.push(
     check('Native required email check', await page.locator('#email').evaluate(e=>e.validity.valueMissing));
     await page.locator('#email').fill('reader@example.com');
     await page.locator('#email').press('Enter');
-    check('Enter submits a truthful preview confirmation', (await page.locator('.form-status').textContent()).includes('Nothing was sent or saved'));
-    check('Preview clears email and focuses status', await page.locator('#email').inputValue()==='' && await page.locator('.form-status').evaluate(e=>e===document.activeElement));
+    await page.waitForFunction(()=>document.querySelector('.form-status').textContent==='Thanks. Your early-access request has been received.');
+    check('Enter submits POST and shows generic success', (await page.locator('.form-status').textContent())===SUCCESS && submissions.length===1);
+    check('POST contains only email and consent version, never address in URL', submissions[0].method==='POST' && submissions[0].keys.sort().join(',')==='consent_version,email' && submissions[0].consent==='ioleia-early-access-v3-2026-11-02' && submissions[0].addressMatches && !submissions[0].url.includes('@'));
+    check('Success clears email and focuses status', await page.locator('#email').inputValue()==='' && await page.locator('.form-status').evaluate(e=>e===document.activeElement));
     check('Submission stays paused', await stopped());
     check('No cookies created', (await context.cookies()).length===0);
+    check('No browser storage', await page.evaluate(()=>localStorage.length===0 && sessionStorage.length===0));
+    failRequest = true;
+    await page.locator('#email').fill('reader@example.com');
+    await page.locator('#email').press('Enter');
+    await page.waitForFunction(()=>document.querySelector('.form-status').textContent.includes('Please try again'));
+    check('Failed request keeps email and restores usable controls', await page.locator('#email').inputValue()==='reader@example.com' && !(await page.locator('#signup-submit').isDisabled()));
+    check('Failure remains calm and generic', !(await page.locator('.form-status').textContent()).includes('503'));
+    failRequest = false;
+    report.consoleErrors = report.consoleErrors.filter(e=>!e.includes('503'));
+    check('Draft source fails closed without endpoint', await (async()=>{const draft=await context.newPage();await draft.goto('file://'+path.join(root,'index.html'));const disabled=await draft.locator('#email').isDisabled() && await draft.locator('#signup-submit').isDisabled();await draft.close();return disabled;})());
     await page.reload();
     await page.keyboard.press('Tab');
     check('Keyboard reaches skip link', await page.locator('.skip-link').evaluate(e=>e===document.activeElement));
@@ -106,11 +129,12 @@ function check(name, condition) {assert.ok(condition, name); report.checks.push(
         await page.getByRole('button',{name:new RegExp('Read message '+(i+1))}).click();
         const data=await page.evaluate(()=>{
           const box=s=>document.querySelector(s).getBoundingClientRect().toJSON();
-          return {scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,orb:box('.orb-art'),text:box('.messages'),signup:box('.signup-form'),input:box('#email'),button:box('#preview-submit')};
+          return {scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,orb:box('.orb-art'),text:box('.messages'),signup:box('.signup-form'),input:box('#email'),button:box('#signup-submit')};
         });
         check(`${width}×${height} message ${i+1}: no overflow or overlap`,data.scrollWidth<=width && data.orb.bottom<=data.text.top && data.text.bottom<=data.signup.top && data.input.width>=200 && data.button.height>=44);
         if(width===1440 || height>=740) check(`${width}×${height} signup controls within screen`,data.button.bottom<=height);
         layout.moments.push(data);
+        if ([1440,390,320].includes(width) && [900,844,740].includes(height)) await page.screenshot({path:path.join(output,`layout-${width}-message-${i+1}.png`),fullPage:true});
       }
       check(`${width}×${height}: stable signup across all messages`,layout.moments.every(m=>m.signup.y===layout.moments[0].signup.y));
       report.layouts.push(layout);
@@ -119,13 +143,14 @@ function check(name, condition) {assert.ok(condition, name); report.checks.push(
     const fallback=await nojs.newPage();
     await fallback.goto(url);
     check('No-JS fallback shows all approved moments', await fallback.locator('.moment:visible').count()===3);
-    check('No-JS fallback disables the form',await fallback.locator('#preview-submit').isDisabled() && await fallback.locator('#email').isDisabled());
+    check('No-JS fallback disables the form',await fallback.locator('#signup-submit').isDisabled() && await fallback.locator('#email').isDisabled());
     check('No-JS fallback states that signup is off',await fallback.locator('noscript').isVisible());
     check('No-JS fallback has no horizontal overflow',await fallback.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await fallback.screenshot({path:path.join(output,'no-javascript.png'),fullPage:true});
     await nojs.close();
-    check('No external network requests',report.externalRequests.length===0);
+    check('No unexpected requests outside local fixture and intercepted API',report.externalRequests.length===0);
     check('No console or page errors',report.consoleErrors.length===0 && report.pageErrors.length===0);
+    report.interceptedSubmissions=submissions;
     fs.writeFileSync(path.join(output,'browser-checks.json'),JSON.stringify(report,null,2));
     console.log(JSON.stringify({passed:report.checks.length,layouts:report.layouts.length,externalRequests:report.externalRequests,errors:report.consoleErrors.concat(report.pageErrors)}));
   } finally {await browser.close();}

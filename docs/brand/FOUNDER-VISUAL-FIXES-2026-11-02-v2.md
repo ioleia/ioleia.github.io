@@ -1,3 +1,5 @@
+> Historical record. This describes an earlier preview, not the current implementation. See [current validation](../review/CURRENT-VALIDATION.md).
+
 # Founder visual fixes — 2 November 2026, v2
 
 Draft PR #2 only. Started from verified head `ef6a7a0f0dacfdc026e9f767e2acae6dd51bba6f`. This record supersedes earlier descriptions of the website's displayed artwork and background; earlier documents and assets remain preserved as history.

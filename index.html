@@ -8,15 +8,17 @@
   <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
   <title>Ioleia — An AI that gets to know you</title>
-  <link rel="icon" href="./assets/ioleia-a2-1-approved-symbol.png" type="image/png">
+  <link rel="icon" href="./assets/ioleia-a2-1-header-ivory.png" type="image/png">
   <link rel="stylesheet" href="./styles.css">
-  <script src="./preview.js" defer></script>
+  <meta name="referrer" content="no-referrer">
+  <script src="./signup-config.js" defer></script>
+  <script src="./site.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header shell">
     <span class="brand-lockup" aria-label="Ioleia">
-      <img class="brand-mark" src="./assets/ioleia-a2-1-approved-symbol.png" width="30" height="30" alt="">
+      <img class="brand-mark" src="./assets/ioleia-a2-1-header-ivory.png" width="30" height="30" alt="">
       <span class="wordmark">ioleia</span>
     </span>
     <span class="preview-notice preview-only">Design preview · Signups are not live</span>
@@ -65,19 +67,20 @@
         <button type="button" aria-label="Read message 3: We haven’t met yet." aria-controls="messages" aria-pressed="false"><span></span></button>
       </div>
 
-      <form class="signup-form" id="signup-form" aria-describedby="signup-copy preview-copy" autocomplete="off">
+      <form class="signup-form" id="signup-form" aria-describedby="signup-copy" autocomplete="off">
         <div class="signup-row">
           <label class="sr-only" for="email">Email</label>
           <input id="email" type="email" autocomplete="off" inputmode="email" maxlength="254" placeholder="Your email" required disabled>
-          <button class="button" id="preview-submit" type="submit" disabled>Join early access</button>
+          <button class="button" id="signup-submit" type="submit" disabled>Join early access</button>
         </div>
         <div class="signup-meta" id="signup-copy">
           <span>Coming first to iPhone.</span>
-          <span>Launch updates only. Unsubscribe anytime.</span>
+          <span>By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.</span>
+        <a href="./early-access-privacy.html">Early Access Privacy</a>
         </div>
         <p class="preview-copy preview-only" id="preview-copy">Preview only. Nothing is sent or saved.</p>
         <p class="form-status" role="status" tabindex="-1"></p>
-        <noscript><p class="noscript-note">This preview form is off. All three messages are shown above.</p></noscript>
+        <noscript><p class="noscript-note">JavaScript is needed to join the early-access list. All three messages are shown above.</p></noscript>
       </form>
     </div>
   </main>

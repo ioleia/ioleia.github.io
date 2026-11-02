@@ -1,0 +1,299 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Bounded Ioleia public website intake. No auth, inference, SES, DNS or core Alpha changes.",
+  "Resources": {
+    "EmailKey": {
+      "Type": "AWS::KMS::Key",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "Description": "Ioleia public early-access email encryption only; separate from God Agent processing",
+        "EnableKeyRotation": true,
+        "KeyPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "AccountAdministration",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Sub": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+                }
+              },
+              "Action": "kms:*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    },
+    "EmailKeyAlias": {
+      "Type": "AWS::KMS::Alias",
+      "Properties": {
+        "AliasName": "alias/ioleia-website-early-access",
+        "TargetKeyId": {
+          "Ref": "EmailKey"
+        }
+      }
+    },
+    "Contacts": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "TableName": "ioleia-website-early-access",
+        "BillingMode": "PAY_PER_REQUEST",
+        "DeletionProtectionEnabled": true,
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "email_key",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "email_key",
+            "KeyType": "HASH"
+          }
+        ],
+        "SSESpecification": {
+          "SSEEnabled": true,
+          "SSEType": "KMS"
+        },
+        "Tags": [
+          {
+            "Key": "Purpose",
+            "Value": "PublicWebsiteEarlyAccess"
+          },
+          {
+            "Key": "RealDataAdmission",
+            "Value": "false"
+          }
+        ]
+      }
+    },
+    "SignupLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ioleia-website-early-access",
+        "RetentionInDays": 7
+      }
+    },
+    "SignupRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "ioleia-website-early-access",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "InsertEncryptedWebsiteSignupOnly",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "dynamodb:PutItem",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Contacts",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "kms:Encrypt",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "EmailKey",
+                      "Arn"
+                    ]
+                  },
+                  "Condition": {
+                    "StringEquals": {
+                      "kms:EncryptionContext:purpose": "ioleia-early-access-email"
+                    }
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ioleia-website-early-access:*"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "SignupFunction": {
+      "Type": "AWS::Lambda::Function",
+      "DependsOn": "SignupLogs",
+      "Properties": {
+        "FunctionName": "ioleia-website-early-access",
+        "Runtime": "python3.13",
+        "Handler": "index.lambda_handler",
+        "MemorySize": 128,
+        "Timeout": 10,
+        "Role": {
+          "Fn::GetAtt": [
+            "SignupRole",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "CONTACTS_TABLE": {
+              "Ref": "Contacts"
+            },
+            "EMAIL_KEY_ID": {
+              "Fn::GetAtt": [
+                "EmailKey",
+                "Arn"
+              ]
+            }
+          }
+        },
+        "Code": {
+          "ZipFile": "\"\"\"Public intake only. Never log events, addresses, exceptions, or request metadata.\"\"\"\nimport hashlib\nimport json\nimport os\nimport re\nfrom datetime import datetime, timezone\n\nORIGIN = 'https://ioleia.com'\nCONSENT_VERSION = 'ioleia-early-access-v3-2026-11-02'\nCONSENT_TEXT = 'By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.'\nSUCCESS = 'Thanks. Your early-access request has been received.'\n_LOCAL = re.compile(r\"[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*\\Z\", re.ASCII)\n_LABEL = re.compile(r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\\Z', re.ASCII)\n\n\ndef normalize_email(value):\n    if not isinstance(value, str):\n        raise ValueError('Invalid input')\n    value = value.strip()\n    if not value.isascii() or not 3 <= len(value) <= 254 or value.count('@') != 1:\n        raise ValueError('Invalid input')\n    local, domain = value.split('@')\n    labels = domain.split('.')\n    if not 1 <= len(local) <= 64 or not _LOCAL.fullmatch(local):\n        raise ValueError('Invalid input')\n    if len(labels) < 2 or not all(_LABEL.fullmatch(label) for label in labels):\n        raise ValueError('Invalid input')\n    if not re.fullmatch(r'[A-Za-z]{2,63}', labels[-1], re.ASCII):\n        raise ValueError('Invalid input')\n    return local + '@' + domain.lower()\n\n\ndef _unique_object(pairs):\n    result = {}\n    for key, value in pairs:\n        if key in result:\n            raise ValueError('Invalid input')\n        result[key] = value\n    return result\n\n\ndef parse_request(event):\n    if not isinstance(event, dict):\n        raise ValueError('Invalid input')\n    headers = event.get('headers') or {}\n    if not isinstance(headers, dict):\n        raise ValueError('Invalid input')\n    headers = {k.lower(): v for k, v in headers.items() if isinstance(k, str)}\n    if headers.get('origin') != ORIGIN:\n        raise ValueError('Invalid input')\n    if event.get('requestContext', {}).get('http', {}).get('method') != 'POST':\n        raise ValueError('Invalid input')\n    if event.get('rawPath') != '/early-access' or event.get('rawQueryString'):\n        raise ValueError('Invalid input')\n    if headers.get('content-type', '').split(';')[0].strip().lower() != 'application/json':\n        raise ValueError('Invalid input')\n    body = event.get('body')\n    if event.get('isBase64Encoded') or not isinstance(body, str) or len(body.encode('utf-8')) > 1024:\n        raise ValueError('Invalid input')\n    data = json.loads(body, object_pairs_hook=_unique_object)\n    if not isinstance(data, dict) or set(data) != {'email', 'consent_version'}:\n        raise ValueError('Invalid input')\n    if data['consent_version'] != CONSENT_VERSION:\n        raise ValueError('Invalid input')\n    return normalize_email(data['email'])\n\n\ndef response(code, message):\n    return {'statusCode': code, 'headers': {'Content-Type': 'application/json', 'Cache-Control': 'no-store'},\n            'body': json.dumps({'message': message}, separators=(',', ':'))}\n\n\ndef store_contact(email, dynamodb, kms, table, key_id):\n    lookup = hashlib.sha256(email.encode('utf-8')).hexdigest()\n    # Never put personal data or the lookup hash in KMS encryption context (CloudTrail).\n    encrypted = kms.encrypt(KeyId=key_id, Plaintext=email.encode('utf-8'),\n                            EncryptionContext={'purpose': 'ioleia-early-access-email'})['CiphertextBlob']\n    item = {\n        'email_key': {'S': lookup},\n        'email_ciphertext': {'B': encrypted},\n        'created_at': {'S': datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00', 'Z')},\n        'status': {'S': 'active'},\n        'source': {'S': 'ioleia.com'},\n        'consent_version': {'S': CONSENT_VERSION},\n    }\n    try:\n        dynamodb.put_item(TableName=table, Item=item, ConditionExpression='attribute_not_exists(email_key)')\n    except Exception as error:\n        # Conditional insert is atomic: repeated signup cannot overwrite consent or suppression.\n        if getattr(error, 'response', {}).get('Error', {}).get('Code') != 'ConditionalCheckFailedException':\n            raise\n\n\ndef lambda_handler(event, context):\n    try:\n        email = parse_request(event)\n    except Exception:\n        return response(400, 'Please check your email and try again.')\n    try:\n        import boto3\n        from botocore.config import Config\n        config = Config(connect_timeout=2, read_timeout=3, retries={'mode': 'standard', 'total_max_attempts': 2})\n        store_contact(email, boto3.client('dynamodb', config=config), boto3.client('kms', config=config),\n                      os.environ['CONTACTS_TABLE'], os.environ['EMAIL_KEY_ID'])\n    except Exception:\n        # Do not emit exception text or stack traces: SDK errors can carry request data.\n        return response(503, 'We couldn\u2019t save that just now. Please try again.')\n    return response(200, SUCCESS)\n"
+        },
+        "Tags": [
+          {
+            "Key": "Purpose",
+            "Value": "PublicWebsiteEarlyAccess"
+          }
+        ]
+      }
+    },
+    "SignupApi": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": "ioleia-website-early-access",
+        "ProtocolType": "HTTP",
+        "CorsConfiguration": {
+          "AllowOrigins": [
+            "https://ioleia.com"
+          ],
+          "AllowMethods": [
+            "POST"
+          ],
+          "AllowHeaders": [
+            "content-type"
+          ],
+          "AllowCredentials": false,
+          "MaxAge": 300
+        }
+      }
+    },
+    "SignupIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "SignupApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "SignupFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 12000
+      }
+    },
+    "SignupRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "SignupApi"
+        },
+        "RouteKey": "POST /early-access",
+        "AuthorizationType": "NONE",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "SignupIntegration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "SignupStage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "ApiId": {
+          "Ref": "SignupApi"
+        },
+        "StageName": "$default",
+        "AutoDeploy": true,
+        "DefaultRouteSettings": {
+          "ThrottlingBurstLimit": 5,
+          "ThrottlingRateLimit": 1,
+          "DetailedMetricsEnabled": false
+        }
+      }
+    },
+    "SignupPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "SignupFunction"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceAccount": {
+          "Ref": "AWS::AccountId"
+        },
+        "SourceArn": {
+          "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${SignupApi}/*/POST/early-access"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "SignupEndpoint": {
+      "Value": {
+        "Fn::Sub": "https://${SignupApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/early-access"
+      }
+    },
+    "ContactsTable": {
+      "Value": {
+        "Ref": "Contacts"
+      }
+    },
+    "EmailKeyArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "EmailKey",
+          "Arn"
+        ]
+      }
+    },
+    "FunctionName": {
+      "Value": {
+        "Ref": "SignupFunction"
+      }
+    }
+  }
+}

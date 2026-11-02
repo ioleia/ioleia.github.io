@@ -1,53 +1,23 @@
-# Ioleia website — single-scene founder preview
+# Ioleia public website — prepared, AWS pending
 
-One continuous scene with:
-- the original approved A2.1 raster artwork beside `ioleia` in the top-left header;
-- the approved luminous orb artwork as the centre visual;
-- a plain midnight-indigo background;
-- three gently changing messages;
-- one constant email signup.
+**PR #2 remains draft and must not merge yet.** On 2 November 2026, the founder chose to keep AWS changes pending. No signup infrastructure or contact records were created. The existing GitHub Pages site remains unchanged.
 
-**Preview only. Keep PR #2 draft; do not merge or deploy until founder visual approval.**
+The reviewed draft preserves the plain midnight navy background, centered luminous orb, frozen three-message copy/crossfade and one fixed email-only signup. The header/favicon now use a transparent warm-ivory mark derived directly from the approved A2.1 source raster. No generated substitute, tracing, resampling or silhouette filtering is involved.
 
-## Brand hierarchy
+`index.html` deliberately retains the two draft-only labels. `signup-config.js` has no endpoint, so the form stays disabled and never simulates success. `site.js` contains the real POST behavior for a future verified endpoint. Failure retains the entered email; valid submissions get a generic response, including duplicates. No checkbox or first name is collected.
 
-The header logo and centre orb are intentionally different roles:
+The exact prepared disclosure is: **By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.** Version: `ioleia-early-access-v3-2026-11-02`. It is not live and is not a legal-compliance determination. The adjacent Early Access Privacy link describes only the proposed register. Counsel review, including mailing/contact disclosure and unsubscribe handling, remains required before any commercial launch email.
 
-### Header
-The small mark beside `ioleia` uses the original approved source crop, without tracing, recolouring, filters, or opacity changes:
-`assets/ioleia-a2-1-approved-symbol.png`.
-It is byte-identical to `ioleia/god-agent`'s `docs/brand/a2-1-master/reference/approved-symbol-crop.png`, retaining the source's black symbol and pale panel.
+See [current validation](docs/review/CURRENT-VALIDATION.md), [current source manifest](docs/review/current-source-manifest.json), [header comparison](docs/brand/header-matte-comparison.png), and the [bounded backend package](deployment/early-access/README.md).
 
-### Centre
-The large centre orb is a square, unscaled crop of the approved luminous artwork:
-`assets/ioleia-luminous-orb-centered.png`, from `assets/reference/approved-light-field-board.png` at `(120, 19, 504, 403)` (right/bottom exclusive).
+## Production preparation
 
-It is displayed without stretching, colour filters, or an A2.1 vector mask. A centered radial fade softens only the surrounding glow. The board is retained as provenance; the website no longer loads or displays its Light Field.
+`tools/build-production.py` requires an exact `https://<api-id>.execute-api.ca-central-1.amazonaws.com/early-access` endpoint and a new output directory. It removes preview-only labels/noindex and allows only that API origin in CSP. It does not deploy, verify AWS, or authorize release. Do not publish a test-fixture endpoint.
 
-See [the versioned visual-fix record](docs/brand/FOUNDER-VISUAL-FIXES-2026-11-02-v2.md) for source fidelity and validation. Earlier brand and review documents remain historical evidence.
+Hosting stays on GitHub Pages. Preserve CNAME and all DNS/email records. No Sites hosting registration, AWS hosting migration, CRM service, dashboard, tracker or mail sender is included.
 
-A2.1 remains the canonical logo geometry for the actual brand mark and app-icon geometry. The luminous centre orb is the expressive visual object used by the website.
+## Verification scope
 
-Rejected `colour-v1` assets remain unused.
+The focused browser suite tests a local production-build fixture with intercepted API responses. It does not create AWS records or prove live CORS, encryption, or provider logging. The separate Python suite uses fake storage/encryption clients. Current results and limitations are explicit in the validation record. Historical evidence lives under `docs/review/history/` and older brand documents are marked historical.
 
-## Preview notices
-
-The visible labels:
-- `Design preview · Signups are not live`
-- `Preview only. Nothing is sent or saved.`
-
-are draft-only safety labels. They remain visible while the signup is fake.
-
-They are marked `preview-only` in HTML and must be removed/disabled in the production build once the real signup backend is approved and working.
-
-The live production website must not show those preview labels.
-
-## Message and signup behavior
-
-Moments 1, 2, and 3 dwell for 16, 20, and 14 seconds with 1.2-second opacity crossfades. The sequence loops.
-
-Pause Motion, form focus, typing/submission, hidden-page behavior, reduced-motion handling, and the one constant email signup remain unchanged.
-
-## Deployment boundary
-
-This branch remains draft-only. Do not merge or deploy until founder visual approval. Live site, DNS, email, AWS, SES, Cognito, Apple, and production systems remain untouched.
+`real_data_admission=false`; all God Agent core Alpha gates remain untouched.

@@ -1,3 +1,5 @@
+> Historical record. This describes an earlier preview, not the current implementation. See [current validation](../review/CURRENT-VALIDATION.md).
+
 # Website brand hierarchy — 2 November 2026
 
 ## Founder clarification
