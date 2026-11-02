@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ioleia is developing a personal AI companion with meaningful continuity, truthfulness, and respect for your agency. Built with care in Ottawa, Canada.">
+  <meta name="description" content="Meet Ioleia, an AI that gets to know you over time. Join early access to be among the first to try it on iPhone.">
   <meta name="theme-color" content="#09092b">
   <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
-  <title>Ioleia — A more personal kind of AI</title>
+  <title>Ioleia — An AI that gets to know you</title>
   <link rel="icon" href="./assets/ioleia-a2-1-mark-dark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <script src="./preview.js" defer></script>
@@ -15,78 +15,110 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="preview-notice">Design preview <span aria-hidden="true">·</span> Signups are not live</div>
+
   <header class="site-header">
-    <div class="shell nav">
+    <div class="shell header-row">
       <a class="brand" href="#top" aria-label="Ioleia home">
-        <img src="./assets/ioleia-a2-1-mark-dark.svg" width="32" height="32" alt="">
+        <img src="./assets/ioleia-a2-1-mark-dark.svg" width="30" height="30" alt="">
         <span class="wordmark">ioleia</span>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#principles">Our approach</a>
-        <a href="#experience">The feeling</a>
-        <a href="#company">About</a>
-        <a class="nav-cta" href="#early-access">Stay in the loop <span aria-hidden="true">↗</span></a>
-      </nav>
+      <button class="motion-control" id="motion-control" type="button" aria-pressed="false" hidden>
+        <span aria-hidden="true">Ⅱ</span> Pause motion
+      </button>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="light-field hero-field" aria-hidden="true"><div class="field-haze"></div><div class="field-flow"></div><div class="field-glimmer"></div></div>
+      <div class="light-field hero-field" aria-hidden="true">
+        <div class="field-haze"></div>
+        <div class="field-flow"></div>
+        <div class="field-glimmer"></div>
+      </div>
+
       <div class="shell hero-content">
-        <!-- A viewport onto the untouched approved rendering reference; no retracing or new logo geometry. -->
         <div class="orb-art" role="img" aria-label="Ioleia luminous orb"></div>
-        <!-- Provisional system-serif wordmark; not a permanent brand font or exported logo lockup. -->
-        <div class="hero-wordmark wordmark" aria-hidden="true">ioleia</div>
-        <p class="eyebrow hero-eyebrow">A personal AI companion, in development</p>
-        <h1 id="hero-title">A more personal<br>kind of AI.</h1>
-        <p class="hero-copy">For the conversations that carry on.<br>For the context that makes you, you.</p>
-        <a class="button primary" href="#early-access">Join early-access updates <span aria-hidden="true">↗</span></a>
-        <p class="small hero-note">Being built with care. Not yet publicly available.</p>
-      </div>
-      <div class="shell hero-foot"><span>Continuity. Honesty. Your agency.</span><button class="motion-control" id="motion-control" type="button" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span> Pause light</button></div>
-    </section>
 
-    <section class="section principles" id="principles" aria-labelledby="principles-title">
-      <div class="shell">
-        <div class="section-heading"><p class="eyebrow">The way we're building</p><h2 id="principles-title">Personal, with principles.</h2><p>Ioleia is being designed to grow more useful with context and time.<br class="desktop-break"> These are the commitments guiding that work.</p></div>
-        <div class="principle-grid">
-          <article class="principle"><span class="principle-number" aria-hidden="true">01 /</span><h3>Continuity that matters.</h3><p>Carry meaningful context forward, so each conversation can build on what came before. Personalization should come from what you choose to share.</p></article>
-          <article class="principle"><span class="principle-number" aria-hidden="true">02 /</span><h3>Honesty, always.</h3><p>Be clear about uncertainty, acknowledge mistakes, and stay truthful about being AI. A personal connection should never depend on pretending.</p></article>
-          <article class="principle"><span class="principle-number" aria-hidden="true">03 /</span><h3>You remain in charge.</h3><p>Support your thinking and your choices. Respect your boundaries, your relationships, and the life you lead beyond the conversation.</p></article>
-          <article class="principle"><span class="principle-number" aria-hidden="true">04 /</span><h3>Privacy, built into the work.</h3><p>Privacy and security are engineering requirements. We are testing and qualifying those protections before inviting people into the private Alpha.</p></article>
+        <h1 id="hero-title">Hi. I’m Ioleia.</h1>
+        <p class="hero-subhead">An AI that gets to know you.</p>
+
+        <div class="hero-copy">
+          <p>Tell me about your life.</p>
+          <p>The people you care about. What you’re working on. The little things that make you, you.</p>
+          <p class="benefit">When you come back, you won’t have to explain it all again.</p>
         </div>
+
+        <form class="signup-form hero-signup" data-preview-signup aria-describedby="hero-signup-copy">
+          <div class="signup-row">
+            <label class="sr-only" for="hero-email">Email</label>
+            <input id="hero-email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="Your email" required>
+            <button class="button primary preview-submit" type="submit" disabled>Join early access</button>
+          </div>
+          <div class="signup-meta" id="hero-signup-copy">
+            <span>Coming first to iPhone.</span>
+            <span>I’ll email you when Ioleia is ready to try. Unsubscribe anytime.</span>
+          </div>
+          <p class="form-status" role="status" tabindex="-1"></p>
+          <noscript><p class="noscript-note">This is a non-live preview. Nothing is collected.</p></noscript>
+        </form>
       </div>
     </section>
 
-    <section class="section experience" id="experience" aria-labelledby="experience-title">
-      <div class="shell experience-grid">
-        <div class="experience-copy"><p class="eyebrow">A glimpse of the feeling</p><h2 id="experience-title">A quiet<br>current of light.</h2><p>The Light Field is Ioleia's visual language: soft, spacious, and gently alive.</p><p>We're shaping it to shift subtly during interaction, with small moments of warmth and illumination. A little atmosphere, with room for your thoughts.</p><button class="text-button" id="respond-button" type="button" aria-controls="light-study" hidden>See the light respond <span aria-hidden="true">↗</span></button><p class="small study-note">A visual study of the Light Field.<br>Not a product screen or a live AI interaction.</p></div>
-        <figure class="light-study" id="light-study"><div class="light-field study-field" aria-hidden="true"><div class="field-haze"></div><div class="field-flow"></div><div class="field-glimmer"></div></div><figcaption><span>Light Field</span><span id="field-state" role="status">Resting study</span></figcaption></figure>
+    <section class="story honesty" aria-labelledby="honesty-title">
+      <div class="light-field honesty-field" aria-hidden="true">
+        <div class="field-haze"></div>
+        <div class="field-flow"></div>
+        <div class="field-glimmer"></div>
+      </div>
+
+      <div class="shell story-copy">
+        <h2 id="honesty-title">I won’t just agree with you.</h2>
+        <p>I’ll help you think things through.</p>
+        <p>I can remember what matters, learn your sense of humour, and get better at knowing when you want help — and when you just want to talk.</p>
+        <p class="emphasis">And sometimes, I’ll disagree.</p>
+        <p>I’m AI, not a person. I’ll be honest about that.</p>
       </div>
     </section>
 
-    <section class="section company" id="company" aria-labelledby="company-title">
-      <div class="shell company-grid"><div><p class="eyebrow">Made with intention</p><h2 id="company-title">A small company.<br>A thoughtful beginning.</h2></div><div class="company-copy"><p>Ioleia Inc. is a Canadian technology company based in Ottawa, Ontario, developing a deeply personal AI companion.</p><p>We're preparing our first invitation-only private Alpha, with privacy, security, and reliability work guiding when we're ready.</p><div class="company-contact"><span>Ioleia Inc. · Ottawa, Canada</span><a href="mailto:heather@ioleia.com">heather@ioleia.com <span aria-hidden="true">↗</span></a><a href="tel:+16134163919">+1 613-416-3919</a></div></div></div>
-    </section>
+    <section class="story meet" aria-labelledby="meet-title">
+      <div class="light-field meet-field" aria-hidden="true">
+        <div class="field-haze"></div>
+        <div class="field-flow"></div>
+        <div class="field-glimmer"></div>
+      </div>
 
-    <section class="section early-access" id="early-access" aria-labelledby="signup-title">
-      <div class="shell signup-grid"><div class="signup-copy"><p class="eyebrow">Keep in touch</p><h2 id="signup-title">Be here for<br>the beginning.</h2><p>Get occasional updates and be notified when Ioleia becomes available.</p><p class="small">Joining the updates list is separate from being selected as an Alpha tester. It doesn't create an account or guarantee early access.</p></div>
-        <div class="signup-panel"><p class="form-preview" id="preview-disclosure"><span class="preview-dot" aria-hidden="true"></span>Preview only — nothing is sent or saved.</p>
-          <!-- No endpoint. CSP blocks all form submissions and network connections. -->
-          <form id="signup-form" aria-labelledby="signup-title" aria-describedby="preview-disclosure" data-consent-version="ioleia-prelaunch-v1-2026-11-02">
-            <div class="field"><label for="email">Email <span>(required)</span></label><input id="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" aria-describedby="preview-disclosure"></div>
-            <div class="field"><label for="first-name">First name <span>(optional)</span></label><input id="first-name" type="text" autocomplete="given-name" maxlength="80"></div>
-            <label class="consent"><input id="consent" type="checkbox" required><span>Get occasional updates and be notified when Ioleia becomes available.</span></label>
-            <p class="small preference-copy">When signups open, every update will include a way to unsubscribe. You can change your mind at any time.</p>
-            <button class="button primary submit-button" id="preview-submit" type="button" disabled>Preview signup <span aria-hidden="true">↗</span></button>
-            <p class="form-status" id="form-status" role="status" tabindex="-1"></p>
-            <noscript><p class="small">This form is a non-live preview. JavaScript is needed to try its confirmation state. Nothing is collected.</p></noscript>
-          </form>
-        </div>
+      <div class="shell meet-content">
+        <h2 id="meet-title">We haven’t met yet.</h2>
+        <p>I’m still being built.</p>
+        <p>If you’d like to be one of the first people to try Ioleia, leave your email.</p>
+        <p class="meet-line">I’ll let you know when it’s time to say hello.</p>
+
+        <form class="signup-form bottom-signup" data-preview-signup aria-describedby="bottom-signup-copy">
+          <div class="signup-row">
+            <label class="sr-only" for="bottom-email">Email</label>
+            <input id="bottom-email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="Your email" required>
+            <button class="button primary preview-submit" type="submit" disabled>Join early access</button>
+          </div>
+          <div class="signup-meta" id="bottom-signup-copy">
+            <span>Coming first to iPhone.</span>
+            <span>Unsubscribe anytime.</span>
+          </div>
+          <p class="form-status" role="status" tabindex="-1"></p>
+          <noscript><p class="noscript-note">This is a non-live preview. Nothing is collected.</p></noscript>
+        </form>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="shell footer-row"><a class="brand footer-brand" href="#top" aria-label="Ioleia, back to top"><img src="./assets/ioleia-a2-1-mark-dark.svg" width="28" height="28" alt=""><span class="wordmark">ioleia</span></a><span>© 2026 Ioleia Inc.</span><span>Thoughtfully in development.</span></div></footer>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <div class="footer-brand">
+        <img src="./assets/ioleia-a2-1-mark-dark.svg" width="25" height="25" alt="">
+        <span class="wordmark">ioleia</span>
+      </div>
+      <span>Ioleia Inc. · Ottawa, Canada</span>
+      <span>© 2026 Ioleia Inc.</span>
+    </div>
+  </footer>
 </body>
 </html>
