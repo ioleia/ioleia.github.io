@@ -1,31 +1,54 @@
 # Preview validation — 2 November 2026
 
-## Browser checks completed
+## Final simplified source review
 
-- Responsive layouts at 320, 390, 768, 1024, and 1440 CSS pixels: no horizontal document overflow. Full-page desktop/tablet/phone captures reviewed for wrapping, section order, and form fit.
-- One H1, meaningful H2/H3 hierarchy, navigation/main/footer landmarks, visible input labels, alt naming for the orb, decorative fields excluded from the accessibility tree, and a skip link.
-- Keyboard activation of the form, pause/resume, and Light Field response. Native invalid-email and missing-consent messages focus the relevant field. Preview confirmation is a live status and receives focus. The form clears its temporary values afterward.
-- Empty/invalid email rejected; unchecked consent rejected; first name may be empty. Consent begins unchecked and is cleared after a valid preview. No account or list membership is implied.
-- Pause stops all six CSS animation layers; resume restarts the visible hero field. The response study announces its temporary warmth and returns to resting.
-- Chrome DevTools `prefers-reduced-motion: reduce`: `matchMedia` true, zero running animations, animation name `none`, transition duration `0s`. The pause control disappears. Emulation restored after testing.
-- Chrome JavaScript disabled and reloaded: preview submit remains disabled, explanatory no-script text appears, content remains readable. JavaScript restored after testing.
-- Browser preview reported no application console errors. Chrome DevTools' optional workspace discovery request was blocked by `connect-src 'none'`, as expected; it is not an application network request.
+The founder-review branch was simplified after the first browser-validation pass.
 
-## Static and integrity checks completed
+Current page structure:
 
-- JavaScript syntax and `git diff --check` pass.
-- Local asset links and anchor targets resolve. IDs are unique.
-- Text contrast pairs checked against static surfaces and a conservative brighter violet surface: lowest tested text ratio 7.22:1. Input boundaries and focus indicators meet 3:1. This is a basics check, not an exhaustive animated-pixel or full WCAG audit.
-- No form endpoint, network library, analytics, cookies, storage API, or third-party font is present. CSP blocks connections and form submission even if the local validation script fails. Inputs have no submission names.
-- Canonical A2.1 master and monochrome dark-background mark match their existing local source bytes; the downloaded luminous reference is preserved unchanged. See the brand manifest.
-- `CNAME` is unchanged. No deployment workflow, AWS configuration, or production code is added.
+- one continuous scrolling page;
+- no section navigation tabs;
+- hero email signup above the fold;
+- one short honesty section;
+- bottom email signup repeating the same action;
+- no feature/principles grid;
+- no Light Field explanation;
+- no first-name field;
+- no consent checkbox;
+- no “See the light respond” interaction;
+- no marketing CTA other than **Join early access**.
 
-## Live boundary verified
+## Static safeguards retained
 
-GitHub Pages settings were inspected read-only: `Deploy from a branch`, `main`, `/ (root)`, existing custom domain `ioleia.com`. The last deployment shown was the prior main deployment. Main was `363f79ea5e8c0cf2687879963fe33e7bf1fdd5db` when work began. The branch descends from the earlier website branch, not from a new production deployment.
+- One H1 and two H2 headings.
+- Skip link, header/main/footer landmarks, visible email placeholders plus programmatic labels, decorative light excluded from the accessibility tree.
+- Both email inputs are required and use native email validation.
+- Both preview submit buttons are disabled in HTML and enabled only by the local script.
+- Valid preview submission is prevented locally, clears the entered email, and announces that nothing was sent or saved.
+- No form endpoint, fetch/XHR, analytics, cookies, storage API, or third-party font is present.
+- CSP keeps `connect-src 'none'` and `form-action 'none'`.
+- Reduced-motion CSS removes animation and transitions.
+- A visible pause-motion control remains for ordinary motion settings.
+- Hidden-tab and offscreen animation pausing remain.
+- Responsive rules cover narrow mobile through desktop layouts; email/button rows stack on small screens.
+- Canonical A2.1/brand assets are unchanged.
+- `CNAME` is unchanged.
+- No deployment workflow or AWS configuration is added.
 
-No live website changes, merges, DNS/email-record changes, AWS deployments, SES changes, Cognito changes, Apple changes, or other production changes were performed by this task. The final publication receipt is retained outside the repository after the draft PR is created, so the exact published tree can be verified without a self-referential commit.
+## Evidence distinction
 
-## Scope limits
+The earlier desktop/tablet/phone screenshots in this folder were produced for the prior, more complex page and are preserved as historical review evidence only.
 
-Browser viewport checks are not physical-device acceptance or a full assistive-technology audit. The small monochrome favicon retains the original fine-detail limitation. The luminous board is a rendering reference; it is not newly certified as pixel-identical to A2.1. Production artwork preparation and backend/hosting qualification remain later implementation work, distinct from founder visual approval.
+They are **not** evidence that the final simplified layout has received founder visual approval.
+
+The final source reuses the same already-reviewed visual implementation primitives, but the changed layout should still be viewed by the founder before merge/deployment. Do not manufacture a browser PASS for a viewport that was not actually re-run.
+
+## Consent / subscription boundary
+
+Founder UX direction is email-only submission without a separate checkbox. The design-only consent record documents the intended affirmative action, but production legal/CASL sufficiency remains for counsel/final launch review.
+
+The preview stores and sends nothing.
+
+## Live boundary
+
+Draft PR #2 remains unmerged. No live website, DNS, email records, AWS, SES, Cognito, Apple, or production system is changed by this preview source.
