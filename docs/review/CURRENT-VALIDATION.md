@@ -1,60 +1,62 @@
-# Current validation — public website preparation, 2 November 2026
+# Current validation — website launch candidate, 3 November 2026 UTC
 
-**Status: prepared and tested offline; NOT deployed. PR #2 remains draft. AWS changes are pending at the founder’s explicit request.** This record applies to the source manifest in this directory and the commit that contains it. The verified final branch SHA is recorded in PR #2’s description and the external task receipt; a document cannot contain its own commit hash.
+**Prepublication checkpoint: live AWS backend PASS; production browser checks PASS.** The containing commit is the tested production candidate for PR #2. GitHub Pages publication and the direct public-site signup check follow this checkpoint; their exact merge/deployment identifiers and cleanup result belong in the PR/task receipt, not in a self-referential commit hash.
 
-## Starting authority and scope
+## Authority and bounded scope
 
-Verified remote PR #2 head before edits: `4acee64ef24a5885caafb51f327b62d4f5b8b99d`. Base/main: `363f79ea5e8c0cf2687879963fe33e7bf1fdd5db`. No unexpected delta was present.
+Remote PR #2 was verified as draft/open at `6132039239d8096c13669d7163fe700dd647a8b2`, with main `363f79ea5e8c0cf2687879963fe33e7bf1fdd5db`, before work and again immediately before preparing this commit. No unknown remote changes were present. The founder explicitly authorized the website stack, fictional tests and cleanup, and publication after the focused checks pass.
 
-The plain `#09092b` background, centered luminous orb and its crop/CSS, and all three approved message sections are unchanged. The header/favicon are now the exact-source-derived transparent ivory treatment. The page has one email input, no first name, no checkbox, one signup CTA, three-message crossfades and a copyright-only footer. One consent statement and a small adjacent Early Access Privacy link were added.
+The deployed template is byte-for-byte the reviewed template at that head. SHA-256: `8fb567b355441f711d36f4e1f3fbc6c9ec79709833a59ff207d63511cdca7e23` (12,701 bytes). The AWS Console Template Studio export was compared byte-for-byte before submission. The console validated the unedited template. No AWS CLI/SDK credential grant, permanent key, new IAM user, SSO-assignment change, CloudShell deployment or global logging change was used.
 
-The source draft keeps both preview notices because no backend exists. It disables the form instead of faking success. The production-build fixture removes both notices and noindex, configures an exact endpoint origin in CSP, and exercises the real POST code through intercepted responses. **The fixture is not a live build or a deployable API endpoint.** Screenshots named `proposed-*` show this intended production appearance; they are not screenshots of ioleia.com.
+## Actual live AWS evidence
 
-## Artwork evidence
+Account **156397421775**, region **ca-central-1**. Stack **ioleia-website-early-access: CREATE_COMPLETE**. Stack ID: `arn:aws:cloudformation:ca-central-1:156397421775:stack/ioleia-website-early-access/73e91520-d71b-11f1-a8f4-021b346e2433`.
 
-- Approved source PNG SHA-256: `bd5d4bf145f3245ddcaf07ae32197c2ae91a11e1e353fff5010a026e8dde0caa`.
-- Original board SHA-256: `f2259727a4926afd49f01936d8ed01609b34a6c6f6f7710fee17621f69fafccf`. The crop `(770,100,1120,450)` is pixel-identical to the approved source.
-- Output: `assets/ioleia-a2-1-header-ivory.png`, 350×350. No resizing, tracing, smoothing, dilation, erosion or substitute geometry. Every output alpha value is mapped directly from the source pixel’s luminance; foreground is `#f8f1e8`.
-- Visible contour mask: zero changed pixel coordinates at the inclusive 128 source-luminance boundary. Bounds `(21,16,334,339)`. Seven additional checks verify the saved alpha thresholds against the direct mapping; these are representation checks, not seven independent geometry tests.
-- The source is flattened RGB. Recovering its unknown authoring alpha is mathematically underdetermined; the derived matte must not be called recovery of that latent alpha. Source edge gradations are mapped directly, pale background is removed, and the right-side handoff and negative space were visually inspected.
-- [Mask/paint comparison](../brand/header-matte-comparison.png) and [machine record](../brand/HEADER-MATTE-2026-11-02-v1.json).
+Before creation, the authenticated console showed no colliding stack, table, Lambda, log group or KMS alias/key. API Gateway had no existing APIs; account logging role was unset. CloudTrail trails/Lake stores and CloudWatch pipelines were empty, with resource discovery/enablement rules not enabled. No enabled inspected configuration was found that would record raw signup request bodies. These were bounded read-only checks, not a claim to have audited every AWS service.
 
-## Focused checks completed
+Resources: KMS key and alias `alias/ioleia-website-early-access`; retained, deletion-protected pay-per-request DynamoDB table `ioleia-website-early-access`; Lambda and its scoped execution role; HTTP API, integration, POST route, default stage and invoke permission; 7-day Lambda log group `/aws/lambda/ioleia-website-early-access`. Runtime permissions are limited to this table's PutItem, this key's Encrypt, and this log group's CreateLogStream/PutLogEvents. No decrypt/read/delete/SES/Cognito runtime access.
 
-**15 Python test cases passed**, using fake AWS clients. They cover conservative normalization, syntax/length boundaries, duplicate and unsubscribed-record preservation, constant response, malformed/extra/duplicate JSON rejection, wrong consent/origin/transport rejection, exactly six record fields, KMS-before-insert ordering, generic errors and no stdout/stderr email leakage, and the template’s limited IAM/CORS scope. These do not demonstrate real AWS encryption or persistence.
+Endpoint: `https://ymcj9la56g.execute-api.ca-central-1.amazonaws.com/early-access`.
+KMS ARN: `arn:aws:kms:ca-central-1:156397421775:key/3a9e232c-cce1-41a7-ac2e-1800ff64a89a`.
+Only POST /early-access; allowed browser origin https://ioleia.com; throttle 1 request/second, burst 5. API access logging is disabled.
 
-**82 browser assertions passed** against the local production-build fixture. This count includes repeated viewport/message assertions, not 82 independent product tests. Viewports: 1440×900, 1440×768, 768×1024, 390×844, 390×667, 320×740 and 320×568. No overflow or orb/text/form overlap; the signup position stays stable across messages. Short screens scroll naturally. The 16/20/14-second dwell sequence, 1.2-second crossfade, focus/typing/submission pause, pause/resume, keyboard access, reduced motion and no-JavaScript fallback passed. The hidden-document test is controlled, not physical-device certification.
+[Live backend record](live-aws-2026-11-03/backend-pass.json) and [stack outputs](live-aws-2026-11-03/stack-outputs.json):
 
-The intercepted success request used POST with email and consent version only, no address in its URL. Success clears the field; failure retains it and restores the controls. The draft’s missing-endpoint path stays disabled. No cookies, local storage, session storage, unexpected requests or unexpected console/page errors were observed. The expected simulated HTTP 503 is excluded from unexpected console errors. These results apply only to the tested build and isolated browser.
+- Certificate-validated real POST with the website's Origin, JSON content type, email and consent version returned HTTP 200 and `Thanks. Your early-access request has been received.`
+- Exactly one item held only `email_key`, `email_ciphertext`, `created_at`, `status`, `source`, `consent_version`. The stored email was Binary KMS ciphertext, not plaintext, and was never decrypted. Consent was exactly v4 below.
+- A duplicate returned the identical generic response. There was still one item; creation time and ciphertext were unchanged.
+- Malformed input returned HTTP 400. Approved-origin preflight returned 204 with the exact allow-origin; an unapproved origin received no allow-origin header. A real localhost browser cross-origin request was rejected with TypeError.
+- The first ten actual Lambda log events contained only INIT_START/START/END/REPORT metadata, no raw email or request body. A follow-up inspection after the preview request found 14 events, still only runtime metadata and no raw email. The console confirmed one-week retention and no subscription filters. API access logging was explicitly disabled.
+- The first fictional record was deleted through the authenticated admin console; a refreshed scan returned/scanned zero items. A second reserved preview record was also inspected and deleted; a fresh completed scan again returned/scanned zero. No real contacts were used.
 
-Static comparisons also confirm frozen message markup, orb bytes/style and CNAME unchanged, no tracking/storage code, one field/CTA, correct footer, and exact production CSP origin. Desktop/390/320 screenshots were visually reviewed. The in-app browser cannot open local `file:` previews under its URL policy; the local artifact and screenshots remain available.
+The Python HTTPS attempt failed before sending a request because its local certificate trust file was absent. Evidence was preserved and the test changed to the macOS system HTTPS client with certificate validation enabled. No verification bypass was used. Later the AWS browser session expired during a log read; it was renewed through the existing SSO portal without any new access grant.
 
-## AWS and live checks — NOT completed
+## Production build and browser checks
 
-The authenticated AWS browser session was verified as account **156397421775**, **ca-central-1**, role `AWSReservedSSO_AdministratorAccess_19cd19193fd5f22f/heather.scott`, after founder-completed MFA.
+The prepared production builder used the verified endpoint. The output removes both preview notices, noindex and the draft privacy notice, and configures CSP connect-src to only the exact API origin. The source served by Pages is now that production output.
 
-CloudShell reported that account verification is in progress. Automatic approval review rejected the new local AWS SSO client grant because it could expose all assigned roles. The grant was denied and its login process canceled. The founder then chose **“Keep AWS changes pending.”** No CloudFormation stack, API, Lambda, role, key, table, contact record or mail sender was created by this task.
+One real frontend defect was found before publication: site.js still required consent v3 while the reviewed contract/config/backend had moved to v4. This disabled the initial production candidate. The failed artifact was preserved, and only the readiness constant and corresponding existing test expectation were aligned to v4. No backend-template correction was needed. The obsolete draft-disabled assertion was removed because the repository root is now the production build.
 
-Normal certificate-valid HTTPS returned HTTP 200 for the existing `https://ioleia.com` company page. `www.ioleia.com` did not resolve, so it is not in the proposed CORS list. No DNS, GitHub Pages settings, email or hosting changes were made.
+The plain midnight navy, transparent ivory A2.1 mark, centered orb, exact frozen message markup/copy, one CTA, no-checkbox consent and copyright-only footer are preserved. Artwork bytes, styles and CNAME are unchanged from the reviewed head. No aurora background was added.
 
-Live signup success, one encrypted database item, duplicate idempotence, server rejection, browser CORS, actual AWS logs, and test-record deletion remain **pending**. No test records exist from this task, so there was nothing to delete. Do not infer live functionality from the offline tests.
+Current checks used the actual browser through the supported computer interface:
+
+- All three messages at 1440×900, 390×844 and 320×740: no horizontal overflow or orb/text/form overlap, stable signup position, usable controls. [Layout measurements](live-aws-2026-11-03/layouts.json), [desktop](live-aws-2026-11-03/layout-1440.jpg), [390px](live-aws-2026-11-03/layout-390.jpg), [320px](live-aws-2026-11-03/layout-320.jpg).
+- The normal timer reached messages one, two and three; sampled fractional opacities proved real crossfades. Form focus paused motion. Chrome reduced-motion emulation kept the first message static beyond its normal dwell, hid motion controls and allowed static manual access to message three; emulation was restored afterward.
+- The unmodified production HTML/CSS/client/config was checked locally. Chrome's native folder picker stalled, so local overrides were abandoned. For the prepublication live form check only, a separate test fixture added a local transport bridge and allowed its own origin in the fixture CSP. The exact production client/config/form sent to the real API through that bridge, with the approved Origin. The real HTTP 200 reached the UI and cleared the field. [Transport evidence](live-aws-2026-11-03/preview-live-response.json). This proves frontend/live-backend behavior through a test transport; the direct public-origin browser check remains the postpublication gate. No bridge or fixture CSP is in production.
+- An intentional test-transport 503 produced the calm retry message, retained the visible fictional address and restored usable controls.
+- Chrome Application inspection found zero local/session storage entries, zero site cookies and zero stored bytes. Network inspection after reload showed only the document, CSS, two scripts and the two local images (favicon reused). No analytics/tracking requests or raw email in URLs. The exact production CSP also blocked Chrome DevTools' own localhost discovery request, as expected.
+
+The existing 15 fake-AWS tests and 82 intercepted-browser assertions are **earlier simulated evidence**, not newly run tests and not proof of live AWS. Their prior report and manifest are preserved at [pre-AWS history](history/pre-aws-console-2026-11-02/CURRENT-VALIDATION.md). The current live/browser evidence above is separate.
 
 ## Consent and sending boundary
 
-Prepared version: **`ioleia-early-access-v4-2026-11-02`**.
+Version: **ioleia-early-access-v4-2026-11-02**.
 
 > By joining, you agree to receive launch updates from Ioleia Inc. You can unsubscribe at any time.
 >
 > Ioleia Inc. · 532 Montreal Rd, Unit 383, Ottawa, ON K1K 4R4 · heather@ioleia.com
 
-This keeps the founder-approved no-checkbox opt-in and adds the company mailing address plus email contact beside the consent request, aligning the prepared form with current CRTC guidance on identification/contact information. No separate checkbox. Each proposed record stores the server-recognized version; the exact text is preserved in the contract and handler. It is **not live** and is **not a legal-sufficiency determination**.
+No checkbox. The Early Access Privacy page describes this encrypted Canada Central register, its six fields and the public contact route for withdrawal/removal. Joining does not create a product account. No marketing email was sent or enabled. Counsel review and a working unsubscribe/suppression path remain required before launch messages; transactional-auth SES is not used for them.
 
-The privacy notice is limited to this register. The already-public contact `heather@ioleia.com` is the withdrawal/contact route. Before commercial launch messages, counsel must review consent/privacy sufficiency, including mailing/contact information, and a working unsubscribe/suppression mechanism must be verified. CRTC guidance includes contact information in requests for consent: [CRTC 2012-548](https://crtc.gc.ca/eng/archive/2012/2012-548.htm). No marketing sending is built or authorized; existing SES work concerns transactional auth mail only.
-
-## Historical evidence
-
-All earlier review documents, browser JSON, contrast data, screenshots, consent proposal and obsolete tooling are scoped under [history](history/pre-public-launch-2026-11-02/README.md). Older brand documents carry explicit historical banners. They may refer to an aurora, SVG hero, first name, checkbox or obsolete form; those are not current requirements or proof.
-
-The historical “97 checks” means **77 repository/browser checks + 20 self-contained-preview checks**, with some repetitions across preview forms. It never meant 97 independent product tests or live signup validation.
-
-`real_data_admission=false`. God Agent protected processing, inference, Cognito qualification, transactional SES, Apple/company verification and all core Alpha gates remain untouched.
+`real_data_admission=false` remains unchanged. No unrelated God Agent infrastructure, Alpha gates, protected inference, Cognito, SES, DNS/email records or hosting settings were changed. Existing GitHub Pages remains the publication mechanism.

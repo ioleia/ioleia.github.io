@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scope": "Live backend; website publication not yet performed",
+  "valid_post": 200,
+  "duplicate": {
+    "http_status": 200,
+    "response_identical": true,
+    "one_item": true,
+    "timestamp_unchanged": true,
+    "ciphertext_unchanged": true
+  },
+  "malformed_post": 400,
+  "cors": {
+    "approved_origin": "https://ioleia.com",
+    "approved_preflight_status": 204,
+    "unapproved_preflight_status": 204,
+    "unapproved_allow_origin_absent": true,
+    "real_browser_origin": "http://127.0.0.1:8766",
+    "real_browser_result": "Cross-origin fetch rejected with TypeError"
+  },
+  "record": {
+    "fields": 6,
+    "binary_ciphertext": true,
+    "decrypted": false,
+    "consent_version": "ioleia-early-access-v4-2026-11-02"
+  },
+  "logs": {
+    "lambda_events_inspected": 10,
+    "event_types": [
+      "INIT_START",
+      "START",
+      "END",
+      "REPORT"
+    ],
+    "raw_email_observed": false,
+    "api_access_logging": "disabled",
+    "retention": "1 week",
+    "subscription_filters": 0
+  },
+  "test_record_cleanup": {
+    "console_deletion_success": true,
+    "refreshed_scan_items_returned": 0,
+    "refreshed_scan_items_scanned": 0,
+    "verified_at": "2026-11-02T19:19:50-05:00"
+  },
+  "https": {
+    "system_client_validation": true,
+    "verification_disabled": false
+  },
+  "real_data_admission": false
+}

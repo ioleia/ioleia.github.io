@@ -1,0 +1,15 @@
+{
+  "scope": "Real AWS response via local test transport; browser CORS verified separately",
+  "method": "POST",
+  "endpoint": "https://ymcj9la56g.execute-api.ca-central-1.amazonaws.com/early-access",
+  "keys": [
+    "consent_version",
+    "email"
+  ],
+  "consent_version": "ioleia-early-access-v4-2026-11-02",
+  "reserved_address_matches": true,
+  "status": 200,
+  "response": {
+    "message": "Thanks. Your early-access request has been received."
+  }
+}

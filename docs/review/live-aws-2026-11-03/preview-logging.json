@@ -1,0 +1,12 @@
+{
+  "eventsLoaded": 14,
+  "eventTypes": [
+    "INIT_START",
+    "START",
+    "END",
+    "REPORT"
+  ],
+  "rawFictionalEmailObserved": false,
+  "scope": "All website Lambda events through the preview request after SSO renewal",
+  "apiAccessLogs": "disabled; verified earlier"
+}

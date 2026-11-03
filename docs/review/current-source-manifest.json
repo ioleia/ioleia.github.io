@@ -1,17 +1,18 @@
 {
-  "status": "AWS pending; draft only",
-  "starting_commit": "4acee64ef24a5885caafb51f327b62d4f5b8b99d",
+  "status": "Live backend and production candidate verified; prepublication checkpoint",
+  "starting_commit": "6132039239d8096c13669d7163fe700dd647a8b2",
+  "endpoint": "https://ymcj9la56g.execute-api.ca-central-1.amazonaws.com/early-access",
   "sha256": {
-    "index.html": "4655ffa0fab03ab72e7fe38ba319d2fe8c75271bb708b415dcfebdb9be61ca01",
+    "index.html": "49dba50af7e2bd990628edc91e1008725e8c52486d6897cce8fc5c8aa2898b33",
     "styles.css": "b5eb53e2a8bac370f4c32a5ed2be9e8dbd9d8a7f19c66103cea0ad2dbbc52ba0",
-    "site.js": "d2fd48520a97aa3a38d52d1fbc981ea80a4a09edd79fc3351c974a31c4476858",
-    "signup-config.js": "f0b8e8541b1e951fc9c12bee9dca7fbb18027200de2b8caa9c9dbe989f3c6c15",
-    "early-access-privacy.html": "780f52e934be945d927bc7f73c992c60cde9aacacf1d333c8b1841f779267f16",
+    "site.js": "1ac2284eb5d800d96e83257cf630a6bb4a700a897e205c75bfea336fa3989c26",
+    "signup-config.js": "596a89e49ba1cb1f6f0ddd334924fb50ccaec0e75ebe2ff7b82249997a2ba23b",
+    "early-access-privacy.html": "15991704e9e8d50f81e525320505d354e267fe4fed400566ce0a3479801df3ec",
     "CNAME": "8f45300316c8e8d32206ea5e1a640044e771645f5864535fbb0b6d8fafa1a473",
     "assets/ioleia-a2-1-header-ivory.png": "154ee9b8e056435c66532acc0ecec4f9a3ac2eb9de5552b81185a80387026e97",
     "assets/ioleia-luminous-orb-centered.png": "db8fe7749e9014be21113e16bb4cef612187b02c84b81463e5c50053dfb0ea7f",
-    "deployment/early-access/handler.py": "51a94498332ae644fd7d3095813af92e7286fc8b4f39c0385ac08d8a554b5417",
-    "deployment/early-access/template.json": "3079f8e1566e1bd6c10426e1ba444178eab606c4fa2f7cbb442a967718717372",
-    "docs/signup-consent-contract.json": "b00d9c6157b8ce2e8de02128f7c2dcba383fba790e7220380914f03ec9f6cedf"
+    "deployment/early-access/handler.py": "9674eb11ce2516895e636172cd2613ebfc1b90a943e9315f9b621fa254a7cfb1",
+    "deployment/early-access/template.json": "8fb567b355441f711d36f4e1f3fbc6c9ec79709833a59ff207d63511cdca7e23",
+    "docs/signup-consent-contract.json": "d0b5702a02bd028228e49567d29d93e8138890b1579f450a0ab9442e0916d290"
   }
 }

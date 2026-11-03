@@ -14,7 +14,7 @@
   const config = window.IOLEIA_SIGNUP;
   const ready = config && typeof config.endpoint === 'string' &&
     /^https:\/\/[a-z0-9]+\.execute-api\.ca-central-1\.amazonaws\.com\/early-access$/.test(config.endpoint) &&
-    config.consentVersion === 'ioleia-early-access-v3-2026-11-02';
+    config.consentVersion === 'ioleia-early-access-v4-2026-11-02';
   let submitting = false;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let current = 0;

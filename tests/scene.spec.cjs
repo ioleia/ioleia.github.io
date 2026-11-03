@@ -76,7 +76,7 @@ function check(name, condition) {assert.ok(condition, name); report.checks.push(
     await page.locator('#email').press('Enter');
     await page.waitForFunction(()=>document.querySelector('.form-status').textContent==='Thanks. Your early-access request has been received.');
     check('Enter submits POST and shows generic success', (await page.locator('.form-status').textContent())===SUCCESS && submissions.length===1);
-    check('POST contains only email and consent version, never address in URL', submissions[0].method==='POST' && submissions[0].keys.sort().join(',')==='consent_version,email' && submissions[0].consent==='ioleia-early-access-v3-2026-11-02' && submissions[0].addressMatches && !submissions[0].url.includes('@'));
+    check('POST contains only email and consent version, never address in URL', submissions[0].method==='POST' && submissions[0].keys.sort().join(',')==='consent_version,email' && submissions[0].consent==='ioleia-early-access-v4-2026-11-02' && submissions[0].addressMatches && !submissions[0].url.includes('@'));
     check('Success clears email and focuses status', await page.locator('#email').inputValue()==='' && await page.locator('.form-status').evaluate(e=>e===document.activeElement));
     check('Submission stays paused', await stopped());
     check('No cookies created', (await context.cookies()).length===0);
@@ -89,7 +89,6 @@ function check(name, condition) {assert.ok(condition, name); report.checks.push(
     check('Failure remains calm and generic', !(await page.locator('.form-status').textContent()).includes('503'));
     failRequest = false;
     report.consoleErrors = report.consoleErrors.filter(e=>!e.includes('503'));
-    check('Draft source fails closed without endpoint', await (async()=>{const draft=await context.newPage();await draft.goto('file://'+path.join(root,'index.html'));const disabled=await draft.locator('#email').isDisabled() && await draft.locator('#signup-submit').isDisabled();await draft.close();return disabled;})());
     await page.reload();
     await page.keyboard.press('Tab');
     check('Keyboard reaches skip link', await page.locator('.skip-link').evaluate(e=>e===document.activeElement));

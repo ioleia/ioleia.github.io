@@ -1,0 +1,17 @@
+{
+  "account": "156397421775",
+  "region": "ca-central-1",
+  "stack": "ioleia-website-early-access",
+  "status": "CREATE_COMPLETE",
+  "endpoint": "https://ymcj9la56g.execute-api.ca-central-1.amazonaws.com/early-access",
+  "table": "ioleia-website-early-access",
+  "function": "ioleia-website-early-access",
+  "kms_key_arn": "arn:aws:kms:ca-central-1:156397421775:key/3a9e232c-cce1-41a7-ac2e-1800ff64a89a",
+  "alias": "alias/ioleia-website-early-access",
+  "role": "ioleia-website-early-access",
+  "log_group": "/aws/lambda/ioleia-website-early-access",
+  "api_id": "ymcj9la56g",
+  "valid_post_status": 200,
+  "tls_verification_result": 0,
+  "consent_version": "ioleia-early-access-v4-2026-11-02"
+}
