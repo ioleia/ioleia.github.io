@@ -41,11 +41,13 @@ Live signup success, one encrypted database item, duplicate idempotence, server 
 
 ## Consent and sending boundary
 
-Prepared version: **`ioleia-early-access-v3-2026-11-02`**.
+Prepared version: **`ioleia-early-access-v4-2026-11-02`**.
 
-> By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.
+> By joining, you agree to receive launch updates from Ioleia Inc. You can unsubscribe at any time.
+>
+> Ioleia Inc. · 532 Montreal Rd, Unit 383, Ottawa, ON K1K 4R4 · heather@ioleia.com
 
-This replaces the shorter duplicate launch-updates line. No separate checkbox. Each proposed record stores the server-recognized version; the exact text is preserved in the contract and handler. It is **not live** and is **not a legal-sufficiency determination**.
+This keeps the founder-approved no-checkbox opt-in and adds the company mailing address plus email contact beside the consent request, aligning the prepared form with current CRTC guidance on identification/contact information. No separate checkbox. Each proposed record stores the server-recognized version; the exact text is preserved in the contract and handler. It is **not live** and is **not a legal-sufficiency determination**.
 
 The privacy notice is limited to this register. The already-public contact `heather@ioleia.com` is the withdrawal/contact route. Before commercial launch messages, counsel must review consent/privacy sufficiency, including mailing/contact information, and a working unsubscribe/suppression mechanism must be verified. CRTC guidance includes contact information in requests for consent: [CRTC 2012-548](https://crtc.gc.ca/eng/archive/2012/2012-548.htm). No marketing sending is built or authorized; existing SES work concerns transactional auth mail only.
 
