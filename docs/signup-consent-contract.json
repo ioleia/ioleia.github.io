@@ -1,12 +1,15 @@
 {
   "status": "Prepared, not live. AWS changes pending at founder request. Not a claim of legal sufficiency.",
-  "consent_version": "ioleia-early-access-v3-2026-11-02",
-  "text": "By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.",
+  "consent_version": "ioleia-early-access-v4-2026-11-02",
+  "text": "By joining, you agree to receive launch updates from Ioleia Inc. You can unsubscribe at any time.",
   "affirmative_action": "Email entered and Join early access submitted",
   "source": "ioleia.com",
   "sender": "Ioleia Inc.",
   "privacy_notice": "early-access-privacy.html",
-  "contact": "heather@ioleia.com",
+  "contact": {
+    "mailing_address": "532 Montreal Rd, Unit 383, Ottawa, ON K1K 4R4",
+    "email": "heather@ioleia.com"
+  },
   "record_fields": [
     "email_key",
     "email_ciphertext",
@@ -17,5 +20,6 @@
   ],
   "normalization": "Trim surrounding whitespace; lowercase domain only. Preserve local-part case, dots and plus addressing.",
   "duplicate_behavior": "Atomic insert only; preserve the original record, including any unsubscribed status. Same response for every valid request.",
-  "sending": "No sending capability. Counsel review, consent sufficiency including mailing/contact disclosures, and a tested unsubscribe mechanism are required before launch emails."
+  "sending": "No sending capability. Counsel review and a tested unsubscribe mechanism are still required before launch emails.",
+  "contact_disclosure": "Ioleia Inc. · 532 Montreal Rd, Unit 383, Ottawa, ON K1K 4R4 · heather@ioleia.com"
 }
