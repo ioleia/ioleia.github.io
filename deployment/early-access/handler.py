@@ -6,8 +6,8 @@ import re
 from datetime import datetime, timezone
 
 ORIGIN = 'https://ioleia.com'
-CONSENT_VERSION = 'ioleia-early-access-v3-2026-11-02'
-CONSENT_TEXT = 'By joining, you agree to receive launch updates from Ioleia Inc. Unsubscribe anytime.'
+CONSENT_VERSION = 'ioleia-early-access-v4-2026-11-02'
+CONSENT_TEXT = 'By joining, you agree to receive launch updates from Ioleia Inc. You can unsubscribe at any time.'
 SUCCESS = 'Thanks. Your early-access request has been received.'
 _LOCAL = re.compile(r"[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*\Z", re.ASCII)
 _LABEL = re.compile(r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\Z', re.ASCII)
