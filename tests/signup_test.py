@@ -83,7 +83,7 @@ class SignupTests(unittest.TestCase):
     def test_consent_matches_page_and_contract(self):
         contract=json.loads((ROOT/'docs/signup-consent-contract.json').read_text())
         self.assertEqual(contract['consent_version'],h.CONSENT_VERSION);self.assertEqual(contract['text'],h.CONSENT_TEXT)
-        self.assertIn(h.CONSENT_TEXT,(ROOT/'index.html').read_text())
+        page=(ROOT/'index.html').read_text();self.assertIn(h.CONSENT_TEXT,page);self.assertIn(contract['contact_disclosure'],page.replace('&middot;','·'))
     def test_template_scope_and_cors(self):
         resources=json.loads((ROOT/'deployment/early-access/template.json').read_text())['Resources']
         self.assertEqual(resources['SignupApi']['Properties']['CorsConfiguration']['AllowOrigins'],[h.ORIGIN])
