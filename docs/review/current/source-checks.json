@@ -1,0 +1,13 @@
+{
+  "approved_three_messages_byte_identical": true,
+  "orb_asset_and_crop_css_unchanged": true,
+  "CNAME_unchanged": true,
+  "draft_form_disabled": true,
+  "production_labels_removed": true,
+  "production_CSP_exact_api_origin_only": true,
+  "no_tracking_or_storage_code": true,
+  "copyright_only_footer": true,
+  "one_email_field_no_checkbox": true,
+  "real_data_admission": false,
+  "AWS_deployed": false
+}

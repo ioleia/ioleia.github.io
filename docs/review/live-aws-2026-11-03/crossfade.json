@@ -1,0 +1,47 @@
+[
+  {
+    "current": "moment-one",
+    "opacity": [
+      1,
+      0,
+      0
+    ],
+    "paused": false
+  },
+  {
+    "current": "moment-two",
+    "opacity": [
+      0.823091,
+      0.176909,
+      0
+    ],
+    "paused": false
+  },
+  {
+    "current": "moment-two",
+    "opacity": [
+      0.222226,
+      0.777774,
+      0
+    ],
+    "paused": false
+  },
+  {
+    "current": "moment-three",
+    "opacity": [
+      0,
+      0.719048,
+      0.280952
+    ],
+    "paused": false
+  },
+  {
+    "current": "moment-three",
+    "opacity": [
+      0,
+      0.121835,
+      0.878165
+    ],
+    "paused": false
+  }
+]

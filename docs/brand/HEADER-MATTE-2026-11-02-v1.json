@@ -1,0 +1,62 @@
+{
+  "board_sha256": "f2259727a4926afd49f01936d8ed01609b34a6c6f6f7710fee17621f69fafccf",
+  "board_crop": [
+    770,
+    100,
+    1120,
+    450
+  ],
+  "board_crop_pixel_differences": 0,
+  "source_sha256": "bd5d4bf145f3245ddcaf07ae32197c2ae91a11e1e353fff5010a026e8dde0caa",
+  "output_sha256": "154ee9b8e056435c66532acc0ecec4f9a3ac2eb9de5552b81185a80387026e97",
+  "source_size": [
+    350,
+    350
+  ],
+  "output_size": [
+    350,
+    350
+  ],
+  "method": "pixelwise alpha=round(255*clamp((233-L)/210)); RGB=(248,241,232), L=Pillow RGB-to-L",
+  "no_resampling_tracing_smoothing_dilation_or_erosion": true,
+  "visible_contour_mask_differences": 0,
+  "visible_bounds_exclusive": [
+    21,
+    16,
+    334,
+    339
+  ],
+  "transparent_pixels": 101410,
+  "partially_transparent_pixels": 3392,
+  "mask_checks": [
+    {
+      "alpha_threshold": 1,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 32,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 64,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 128,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 192,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 224,
+      "changed_pixel_coordinates": 0
+    },
+    {
+      "alpha_threshold": 254,
+      "changed_pixel_coordinates": 0
+    }
+  ],
+  "limitation": "Original is flattened RGB, not an authored alpha mask. This preserves source pixel positions and the exact visible 50% contour (inclusive luminance 128); original latent subpixel coverage cannot be proved. Pale matte is keyed out and remaining edge gradations are mapped directly, never traced or spatially filtered."
+}

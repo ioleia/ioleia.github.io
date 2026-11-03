@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-02",
+  "layoutResults": [
+    {
+      "documentWidth": 305,
+      "overflow": false,
+      "viewport": 320
+    },
+    {
+      "documentWidth": 375,
+      "overflow": false,
+      "viewport": 390
+    },
+    {
+      "documentWidth": 753,
+      "overflow": false,
+      "viewport": 768
+    },
+    {
+      "documentWidth": 1009,
+      "overflow": false,
+      "viewport": 1024
+    },
+    {
+      "documentWidth": 1425,
+      "overflow": false,
+      "viewport": 1440
+    }
+  ],
+  "formResults": {
+    "empty": {
+      "emailMissing": true,
+      "focus": "email",
+      "status": ""
+    },
+    "invalid": {
+      "focus": "email",
+      "typeMismatch": true
+    },
+    "unchecked": {
+      "consentMissing": true,
+      "focus": "consent",
+      "status": ""
+    },
+    "valid": {
+      "consentChecked": false,
+      "email": "",
+      "focus": "form-status",
+      "status": "Preview complete. Nothing was sent or saved, and you have not joined a list. Signups will open when the site is ready.",
+      "url": "http://127.0.0.1:8765/#early-access"
+    }
+  },
+  "motion": {
+    "pause": "all six CSS layers paused",
+    "resume": "visible hero layer running",
+    "response": "keyboard activation announces A moment of warmth"
+  },
+  "reducedMotion": {
+    "method": "Chrome DevTools CSS media emulation",
+    "matches": true,
+    "animations": 0,
+    "animationName": "none",
+    "transitionDuration": "0s"
+  },
+  "javascriptDisabled": {
+    "method": "Chrome DevTools disable JavaScript and reload",
+    "formButtonDisabled": true,
+    "fallbackVisible": true
+  },
+  "scope": "Browser basics and visual checks; not a full WCAG audit"
+}

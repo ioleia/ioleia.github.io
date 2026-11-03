@@ -1,0 +1,32 @@
+{
+  "status": "design-only; not implemented, persisted, or a legal-compliance determination",
+  "form_id": "ioleia-early-access",
+  "consent_version": "ioleia-early-access-v2-2026-11-02",
+  "visible_purpose_copy": "I'll email you when Ioleia is ready to try. Unsubscribe anytime.",
+  "sender": "Ioleia Inc.",
+  "purpose": "Ioleia launch and availability updates",
+  "required_inputs": ["email"],
+  "optional_inputs": [],
+  "founder_ux_direction": "No separate consent checkbox. The affirmative action is entering an email and submitting the clearly labelled Join early access form after the purpose and unsubscribe copy are displayed.",
+  "future_server_record": {
+    "email": "validated subscription address",
+    "consent": {
+      "affirmative_action": "email entered and Join early access submitted",
+      "version": "server-recognized consent version",
+      "text": "exact server-owned purpose/disclosure copy presented for this version",
+      "source": "ioleia-public-website/early-access",
+      "received_at": "server-generated UTC timestamp",
+      "page_revision": "deployed website revision",
+      "subscription_status": "pending or confirmed according to the separately approved production flow"
+    },
+    "withdrawal": "record unsubscribe status and server timestamp; enforce suppression"
+  },
+  "constraints": [
+    "This is a UX/data-contract proposal, not legal advice or a claim of CASL compliance.",
+    "Production disclosure/consent handling must receive final legal review before launch.",
+    "A signup is separate from selection for product testing and creates no Ioleia account.",
+    "Do not collect IP address, user agent, or unrelated metadata by default.",
+    "Do not create this record from the preview form.",
+    "No production endpoint has been approved or wired in this branch."
+  ]
+}
